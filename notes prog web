@@ -1,0 +1,28 @@
+6 types de pokemoun : 
+    eau
+    feu
+    plante
+    ....
+    
+tableau qui défonce qui :
+        eau     feu     plante
+eau      .       +        -
+feu      -       .        +
+plante   +       -        .
+
+Autres types :    
+    combat défonce eau
+    vol
+    roche
+    
+git clone <lien>
+git diff
+git add intex.html
+git status
+git commit -m "AHA LE MESSAGE"
+
+
+mattew commence à créer les classes comme pokémon.
+canvas -> lier un objet à un sprite, afficher une première interface de combat (pas implémentée derrière juste pour avoir une idée de l'affichage
+détecter l'interaction utilisateur et créer les fonctions principales (vérifier qu'ils sont bien fonctionnels vec des console.print par exemple)
+créer les classes et les types.
