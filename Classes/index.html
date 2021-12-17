@@ -1,0 +1,128 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="main.css" rel="stylesheet">
+    <link rel="icon" href="img/index.png">
+    <title>POKEMON</title>
+</head>
+<body>
+    <nav>
+        <img id="titlePokemon" src="img/PokemonTitle.jpg" height="200" width="400"/>
+        
+        <audio id="audio"
+            controls
+            src="song/CynthiaTheme.mp3">
+            Your browser does not support the
+            <code>audio</code> element.
+        </audio>
+        
+        <input id="btnPlayStop" class="buttonplay" type="button" onclick="play_pause()">
+        <input id="volume-control" type="range" min="0" max="100" value="50">
+
+        <input type="button" value="CHANGE" onclick="changeSong()">
+
+        <div class="buttonStyled" onclick="this.classList.toggle('active')">
+            <div class="fond" x="0" y="0" width="200" height="200"></div>
+            <div class="icon" width="200" height="200">
+              <div class="partie gauche" x="0" y="0" width="200" height="200" fill="#fff"></div>
+              <div class="partie droite" x="0" y="0" width="200" height="200" fill="#fff"></div>
+            </div>
+            <div class="point"></div>
+        </div>
+
+    </nav>
+
+
+
+
+
+
+    <script>
+        let i = 0;
+
+        function play_pause(){
+            let audio = document.getElementById("audio");
+            let bouton = document.getElementById("btnPlayStop");
+            
+            if(audio.paused === true){
+                audio.play();
+                bouton.classList.remove("buttonplay");   
+                bouton.classList.add("buttonpause"); 
+            }
+
+            else{
+                audio.pause();
+                bouton.classList.remove("buttonpause");
+                bouton.classList.add("buttonplay");   
+            }
+        }
+
+        
+
+        function changeSong(){
+            let audio = document.getElementById("audio");
+            let songs = ["song/LanceTheme.mp3", "song/BlueTheme.mp3", "song/CynthiaTheme.mp3"];
+            if(i < songs.length){
+                console.log(i);
+                console.log(songs[i]);
+                audio.src = songs[i];
+                audio.play();
+                i = i + 1;
+            }
+
+            if(i >= songs.length){
+                i = 0;
+            }
+        }
+
+        let volume = document.querySelector("#volume-control");
+        volume.addEventListener("change", function(e) {
+            audio.volume = e.currentTarget.value / 100;
+        })
+
+        range.on("change", () => {
+            audio.volume = range.value;
+        });
+
+        class Pokemon{
+            constructor(nom, type, pv, atk, def, vitesse){
+                this.nom = nom;
+                this.type = type;
+                this.pv = pv;
+                this.atk = atk;
+                this.def = def;
+                this.vitesse = vitesse;
+            }
+
+            getPokemon = function(){
+                return "Nom : " + this.nom + "\nType : " + this.type + "\nPV : " + this.pv + "\nAttaque : " + this.atk + "\nDefense : " + this.def + "\nVitesse : " + this.vitesse; 
+            };
+
+            getType = function(){
+                return this.type;
+            } 
+
+            Attaque = function(Pokemon){
+                console.log(this.nom + " utilise CLOSE COMBAT !");
+                
+                if(Pokemon.type == "Normal"){
+                    console.log("c'est super efficace !");
+                    console.log(Pokemon.nom + " est KO");
+                }
+            }
+        }
+
+        const poke1 = new Pokemon("Moumouton", "Normal", 32, 23, 12, 25);
+        const poke2 = new Pokemon("Tygnon", "Combat", 100, 88, 42, 30);
+        console.log(poke1);
+        console.log(poke1.getPokemon());
+
+        console.log(poke2);
+        console.log(poke2.getPokemon());
+
+        poke2.Attaque(poke1);
+    </script>   
+</body>
+</html>
