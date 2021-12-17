@@ -1,34 +1,34 @@
-var canvas;
-var context;
-var backgroundContext;
+//box
+//var context;
+const canvas = document.querySelector('canvas');
 
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-var mob = new Image();
-	mob.src = "pika.png";
+var terrain = new Image();
+	terrain.src = "battleground_test.png";
+
+var pk1 = new Image();
+    pk1.src = "vaporeon_dos.png";
+
+var pk2 = new Image();
+	pk2.src = "flareon.png";
 
 window.onload = function()		// At start
 {
-var backgroundCanvas;
-var monPara = window.document.getElementById("para_1");
-    
-    //init background for collision test
-    backgroundCanvas = document.createElement( "canvas" );
-    // Adjust backgroundCanvas size at window's size
-    backgroundCanvas.width = window.innerWidth;
-    backgroundCanvas.height = window.innerHeight;
-    // Init backgroundContext for collision test
-    backgroundContext = backgroundCanvas.getContext("2d");
-    // Draw background in backgroundContext
-    
-    //init our canvas and graphic context
-    canvas = document.getElementById("myCanvas");
-    // Adjust backgroundCanvas size at window's size
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    // Init context to draw the game
-    context = canvas.getContext("2d");	
-    context.drawImage(mob,100,100, 100, 100);
-    context.drawImage(mob,500,500, 100, 100);	
-        
-// Render the scene
+
+const white = canvas.getContext('2d');
+
+white.fillStyle= 'rgba(255,255,255)';
+white.fillRect(100, 0, 1300, 600);
+console.log(canvas);
+ 
+const background = canvas.getContext("2d");	
+background.drawImage(terrain,150,100, 1150, 500);
+console.log(canvas);
+
+context = canvas.getContext("2d");	
+context.drawImage(pk1,300,150, 500, 500);
+
+context.drawImage(pk2,880,0, 300, 300);
 }
