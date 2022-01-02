@@ -5,20 +5,6 @@ const canvas = document.querySelector('canvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-// le repertoire des id des images
-/*
-var imgInterfaceRepertoireId;						a faire fonctionner
-
-imgInterfaceRepertoireId = [
-	{src:"int_pics/but_attack.png", id:"btnAtk"},		
-	{src:"int_pics/but_bag.png", id:"btnBag"},
-	{src:"int_pics/but_pokemon.png", id:"btnSwap"},
-	{src:"int_pics/but_escape.png", id:"btnFlee"},
-	{src:"int_pics/fond_int.png", id:"fondInt"}
-	//à remplir avec les boutons colorés selon le type des attaques
-];	
-*/
-
 var terrain = new Image();
 	terrain.src = "int_pics/battleground_test.png";
 
@@ -28,62 +14,55 @@ var pk1 = new Image();
 var pk2 = new Image();
 	pk2.src = "int_pics/flareon.png";
 
-// sur l intreface
-var backgroundInt; // le Background de l'interface
-var btnAtk; 
-var btnBag;
-var btnSwap;
-var btnFlee; 
+// sur l interface
+var backgroundInt = new Image();
+	backgroundInt.src = "int_pics/fond_int.png"; // le Background de l'interface
+var btnAtk = new Image();
+	btnAtk.src = "int_pics/but_attack.png"; 
+var btnBag = new Image();
+	btnBag.src = "int_pics/but_bag.png";
+var btnSwap = new Image();
+	btnSwap.src = "int_pics/but_pokemon.png";
+var btnFlee = new Image();
+	btnFlee.src = "int_pics/but_escape.png"; 
 
-function addInterface() {					// a revoir avec Clea
+function addInterface() {					// espace de travail (100, 700, 1300, 300);
 
-	btnAtk.x = 500;
-	btnAtk.y = 720;
+	context = canvas.getContext("2d");
+	context.drawImage(backgroundInt,400,710, 600, 280);
 
-	btnBag.x = btnStart.x - 200;
-	btnBag.y = btnAtk.y - 100;
-
-	btnSwap.x = btnAtk.x;
-	btnSwap.y = 200;
-
-	btnBag.x = btnStart.x + 200;
-	btnBag.y = btnAtk.y - 100;
-
-	// ajoute les boutons sur l'interface 
-	Inteface_cbt.addChild(backgroundInt, btnAtk, btnBag, btnSwap, btnFlee);
+	context.drawImage(btnAtk,500,715, 400, 160);
+	context.drawImage(btnBag,405,885, 190, 80);
+	context.drawImage(btnSwap,805,885, 190, 80);
+	context.drawImage(btnFlee,605,905, 190, 80);
 	
 	// écouteur sur les boutons
-	btnAtk.onPress = FonctionAttaque;
+	//btnAtk.onclick = FonctionAttaque();				// Déterminer quand est-ce que ça clique
 	//btnBag.onPress = NotDevelopedYet;
 	//btnSwap.onPress = NotDevelopedYet;
 	//btnFlee.onPress = NotDevelopedYet;
 
 }
-/*
+
 function FonctionAttaque() {	
 
-	Atk1.x = 400;
-	Atk1.y = 800;
+	//context.clearRect(400,710, 600, 280);	// on clear la zone d'interface			//le clear fonctionne, mais s'active tout seul
 
-	Atk2.x = Atk1.x + 100;
-	Atk2.y = Atk1.y;
+	context = canvas.getContext("2d");
+	context.drawImage(backgroundInt,400,710, 600, 280);						// on re dessine illico la zone
 
-	Atk3.x = Atk1.x;
-	Atk3.y = Atk1.y + 100;
-
-	Atk4.x = Atk1.x + 100;
-	Atk4.y = Atk1.y + 100;
-
-	// ajoute les boutons sur l'interface 
-	Inteface_cbt.addChild(backgroundInt, Atk1, Atk2, Atk3, Atk3);
+	context.drawImage(btnAtk,410,720, 285, 125);
+	context.drawImage(btnAtk,705,720, 285, 125);
+	context.drawImage(btnAtk,410,855, 285, 125);
+	context.drawImage(btnAtk,705,855, 285, 125);
 	
 	// écouteur sur les boutons
-	Atk1.onPress = FonctionAttaque1;
-	Atk2.onPress = FonctionAttaque2;
-	Atk3.onPress = FonctionAttaque3;
-	Atk4.onPress = FonctionAttaque4;
+	//Atk1.onPress = FonctionAttaque1;
+	//Atk2.onPress = FonctionAttaque2;
+	//Atk3.onPress = FonctionAttaque3;
+	//Atk4.onPress = FonctionAttaque4;
 }
-*/
+
 window.onload = function()	{	// At start
 
 const white = canvas.getContext('2d');
@@ -107,6 +86,21 @@ const Interface_cbt = canvas.getContext('2d');	// l inteface qui accueille les b
 Interface_cbt.fillStyle= 'rgba(200,200,200)';
 Interface_cbt.fillRect(100, 700, 1300, 300);
 
-
+addInterface();	// a developper....
 }
-addInterface();		// a developper....
+		
+
+
+// le repertoire des id des images
+/*
+var imgInterfaceRepertoireId;						a faire fonctionner
+
+imgInterfaceRepertoireId = [
+	{src:"int_pics/but_attack.png", id:"btnAtk"},		
+	{src:"int_pics/but_bag.png", id:"btnBag"},
+	{src:"int_pics/but_pokemon.png", id:"btnSwap"},
+	{src:"int_pics/but_escape.png", id:"btnFlee"},
+	{src:"int_pics/fond_int.png", id:"fondInt"}
+	//à remplir avec les boutons colorés selon le type des attaques
+];	
+*/
