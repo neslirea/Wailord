@@ -12,8 +12,8 @@ class Types {
            ];
     }  
     effets(type1, type2) {
-        let index1 = this.liste_types.indexOf(Type1);
-        let index2 = this.liste_types.indexOf(Type2);
+        let index1 = this.liste_types.indexOf(type1);
+        let index2 = this.liste_types.indexOf(type2);
         return this.effects[index1][index2]
     }
     get_types(){
