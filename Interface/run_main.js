@@ -27,6 +27,31 @@ let gener = new Audio('Musiques/fondmelee.mp4')
 gener.loop=true;
 gener.volume=0.5;
 let creditsound = new Audio('Musiques/credits.mp3');
+
+
+// CREDITS
+let crd = new Image();
+ crd.src = "Sprites_Menus/credits.jpg";
+
+let programmers = new Image();
+ programmers.src = "Sprites_Menus/Programmers.png";
+
+let clea = new Image();
+ clea.src = "Sprites_Menus/CleaAubery.png";
+
+let mattew = new Image();
+ mattew.src = "Sprites_Menus/MattewMartin.png";
+ 
+ let yann = new Image();
+ yann.src = "Sprites_Menus/YannJobard.png";
+
+let stephane = new Image();
+ stephane.src = "Sprites_Menus/StephaneRoche.png";
+
+ let skip = new Image();
+ skip.src = "Sprites_Menus/skip.png";
+
+
 //
 //variables pour contenir les id des setInterval pour pouvoir les clear et donc arrêter les répétitions
 let MENU_Interval_ID
@@ -78,8 +103,7 @@ let casep;
 //
 
 menus = function(){
-    console.log(MENU_Interval_ID)
-	
+    //console.log(MENU_Interval_ID)	
     window.onclick = () => Gamerunning = true
     
     if (Gamerunning)
@@ -107,7 +131,7 @@ menus = function(){
 			
 			//affichage de texte et de ses paramètres + gestion du déplacement à la souris sur le menu
             context.fillStyle='blue';
-            context.fillText('Campagne', 400, 180);
+            context.fillText('Combat', 400, 180);
             if((posSourisX>400)&(posSourisY>150)&(posSourisY<190)) //si la souris se trouve dans cette zone...
 			{
 				casep ="blue";
@@ -121,7 +145,7 @@ menus = function(){
 				//
 				
                 context.fillStyle='blue';
-                context.fillText('Campagne', 400, 180);
+                context.fillText('Combat', 400, 180);
 				if (prtaudio!=0) //si la souris arrive sur la zone depuis une autre zone alors...
 				{
 					prtaudio = 0;
@@ -129,15 +153,13 @@ menus = function(){
 					audio.play()
 				}
 				
-				//SUR CLICK, TRANSITION VERS UN ECRAN FIXE, SUITE A DETERMINER
-				
+				//SUR CLICK, TRANSITION VERS UN ECRAN FIXE, SUITE A DETERMINER				
 				window.onclick = () => {
+					gener.pause();
 					context.clearRect(0, 0, canvas.width, canvas.height);
-					clearInterval(MENU_Interval_ID)
-					context.drawImage(titlescreen,0,0,canvas.width,canvas.height);
-					context.drawImage(mob,0,0, 100, 100);
-					context.drawImage(mob,700,500, 100, 100);
 					console.log(MENU_Interval_ID)
+					clearInterval(MENU_Interval_ID)
+					MENU_Interval_ID=setInterval(choix,10);
 				}
             }
 
@@ -269,10 +291,13 @@ console.log(MENU_Interval_ID)
 
 credits = function()
 {
-	context.drawImage(title,0,0,canvas.width,300);
-	creditsound.play();
-	context.fillStyle='black';
-	context.fillText('Click to skip', 180,35);
+	context.drawImage(crd,0,0,canvas.width,canvas.height);
+	 context.drawImage(programmers,310,310,170,25);
+	 context.drawImage(clea,313,345,160,25);
+	 context.drawImage(mattew,313,380,160,25);
+	 context.drawImage(yann,313,415,160,25);
+	 context.drawImage(stephane,300,450,185,28);
+	 context.drawImage(skip,canvas.width-50,canvas.height-50,50,50);
 	window.onclick =() => {
 		clearInterval(Credits_Interval_ID)
 		MENU_Interval_ID=setInterval(menus,10);

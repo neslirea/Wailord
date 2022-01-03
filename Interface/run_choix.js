@@ -1,28 +1,7 @@
-//déclaration de variable pour contenir les paramètres liés au canvas
-let canvas;
-let context;
-let backgroundContext;
-
-let Gamerunning = false; //drapeau pour l'écran titre
-
-// Mouse positions
-let posSourisX = 0;
-let posSourisY = 0;
-
-//variables pour contenir les id des setInterval pour pouvoir les clear et donc arrêter les répétitions
-let MENU_Interval_ID
-let Credits_Interval_ID
-
-let title = new Image(); //image pour le titre de l'écran titre
-	title.src = "Sprites_Menus/PokemonTitle.png";
-
-
-let titlescreen = new Image(); //image pour l'écran titre
-	titlescreen.src = "Sprites_Menus/affpoke.png"
 
 let charmander = new Image(); //image pour le menu
 	charmander.src = "Sprites_Pokemon/charmander.png";
-
+	/*
 function mouse_position(event){
 	posSourisX = event.offsetX;
 	posSourisY = event.offsetY;
@@ -53,10 +32,9 @@ let backgroundCanvas;
 	
     MENU_Interval_ID=setInterval(choix,10); //répétitions toutes les 10ms de la fonction menus   
 }
-
+*/
 let flag = false;
 
-let casep;
 let pokemons = null;
 let current = 0;
 //
@@ -64,7 +42,8 @@ let current = 0;
 choix = function(){
     //console.log(MENU_Interval_ID)
 	
-    window.onclick = () => Gamerunning = true
+    
+	window.onclick = () => Gamerunning = true
     
     if (Gamerunning)
     {
@@ -81,15 +60,43 @@ choix = function(){
 		})
 
 		// Dessine un rectangle pour former le cadre du pokemon
-		let lineaire = context.createLinearGradient(175, 130, 450, 400);
+		let lineaire = context.createLinearGradient(175, 130, 450, 350);
 		lineaire.addColorStop(0,'#BB0B0B');
         lineaire.addColorStop(1, 'white');
         context.fillStyle = lineaire;
-        context.fillRect(175, 130, 450, 400);
+        context.fillRect(175, 130, 450, 350);
 
 		//Affiche les deux flèches
 		triangle("#FFE800","#0062cc",700, 750, 292, 367);
 		triangle("#FFE800","#0062cc",100, 50, 292, 367);
+
+		// Dessine un rectangle pour former le bouton sélection
+		lineaire = context.createLinearGradient(160, 500, 485, 60);
+		//lineaire.addColorStop(0,'#0062cc');
+        //lineaire.addColorStop(1, '#0022bb');
+		lineaire.addColorStop(0, '#cccccc');
+		lineaire.addColorStop(1, '#0022bb');
+        context.fillStyle = lineaire;
+        context.fillRect(160, 500,485, 60);
+
+		//affichage du Pokemon
+		let pokemon = pokemons[current]
+		let image = new Image();
+		image.src = "Sprites_Pokemon/"+pokemon.sprite;
+		context.drawImage(image,225, 180, 375, 350); //affichage du pokemon
+		let type = new Image();
+		type.src = "Sprites_Menus/"+pokemon.type+".png";
+		context.drawImage(type,375, 185, 50, 50); //affichage du pokemon
+		context.font = "bold 40px courier";
+        context.fillStyle='black';
+        context.fillText((pokemon.nom), 300, 170);
+
+		//affichage de texte et de ses paramètres
+        context.font = "bold 50px courier";
+        context.fillStyle='black';
+        context.fillText(('CHOIX DU POKEMON'), 160, 80);
+		context.font = "30px courier";
+        context.fillText(('SELECTIONNER CE POKEMON'), 190, 540);
 
 		//si on est dans la zone du triangle 1
         if((posSourisX>40)&(posSourisX<110)&(posSourisY>282)&(posSourisY<377)) //si la souris se trouve dans cette zone...
@@ -128,11 +135,66 @@ choix = function(){
 		{
 			casep ="blue";			
 			//affichage d'un rectangle avec transparence 
-			let lineaire = context.createLinearGradient(175, 130, 450, 400);
+			context.globalAlpha = 0.4;
+			let lineaire = context.createLinearGradient(175, 130, 450, 350);
 			lineaire.addColorStop(0,'#850606');
 			lineaire.addColorStop(1, '#f0f0f0');
 			context.fillStyle = lineaire;
-			context.fillRect(175, 130, 450, 400);
+			context.fillRect(175, 130, 450, 350);
+			context.globalAlpha = 1;
+
+			//Affichage des attaques
+			let attaques = pokemon.getAttaques();
+			context.fillRect(200, 250, 185, 85);
+			context.fillRect(415, 250, 185, 85);
+			context.fillRect(200, 350, 185, 85);
+			context.fillRect(415, 350, 185, 85);
+			//affichage de l'attaque 1
+			if (attaques.length>=1){				
+				context.fillStyle = "white";				
+				context.fillRect(200, 250, 185, 85);
+				context.font = "bold 18px courier";
+				context.fillStyle='black';
+				context.fillText((attaques[0].nom), 230, 280);
+			}
+			if (attaques.length>=2){				
+				context.fillStyle = "white";				
+				context.fillRect(415, 250, 185, 85);
+				context.font = "bold 18px courier";
+				context.fillStyle='black';
+				context.fillText((attaques[1].nom), 445, 280);
+			}
+			if (attaques.length>=3){				
+				context.fillStyle = "white";				
+				context.fillRect(200, 350, 185, 85);
+				context.font = "bold 18px courier";
+				context.fillStyle='black';
+				context.fillText((attaques[2].nom), 230, 375);
+			}
+			if (attaques.length>=4){				
+				context.fillStyle = "white";				
+				context.fillRect(415, 350, 185, 85);
+				context.font = "bold 18px courier";
+				context.fillStyle='black';
+				context.fillText((attaques[3].nom), 445, 375);
+			}
+		}		
+		
+		//gestion du déplacement à la souris sur le bouton SELECT (160, 500, 485, 60)
+        if((posSourisX>160)&(posSourisX<660)&(posSourisY>485)&(posSourisY<545)) //si la souris se trouve dans cette zone...
+		{
+			casep ="blue";			
+			//affichage d'un rectangle avec transparence 
+			// Dessine un rectangle pour former le bouton sélection
+			lineaire = context.createLinearGradient(160, 500, 485, 60);
+			lineaire.addColorStop(0,'#0062cc');
+			lineaire.addColorStop(1, '#0022bb');
+			context.fillStyle = lineaire;
+			context.fillRect(160, 500, 485, 60);
+			context.font = "bold 30px courier";
+			
+			context.fillStyle = "black";
+			context.fillText(('SELECTIONNER CE POKEMON'), 190, 540);
 				
 			//SUR CLICK, TRANSITION VERS UN AUTRE ECRAN (COMBAT)				
 			window.onclick = () => {
@@ -143,13 +205,9 @@ choix = function(){
 				context.drawImage(mob,700,500, 100, 100);
 				console.log(MENU_Interval_ID)
 			}
-		}			
+		}	
 
-		//affichage de texte et de ses paramètres
-        context.font = "bold 50px courier";
-        context.fillStyle='black';
-        context.fillText(('CHOIX DU POKEMON'), 160, 80);
-		afficher_pokemon(pokemons[current]);
+
 
 			/* AFFICHAGE DE LA POS SOURIS (debug)
 			console.log(posSourisX)
@@ -202,8 +260,8 @@ let triangle = function(col1, col2, x1, x2, y1, y2){
 let afficher_pokemon = function(pokemon){
 		let image = new Image();
 		image.src = "Sprites_Pokemon/"+pokemon.sprite;
-		context.drawImage(image,225, 155, 375, 400); //affichage du chef dans le menu
+		context.drawImage(image,225, 155, 375, 350); //affichage du pokemon
 		context.font = "bold 30px courier";
         context.fillStyle='black';
-        context.fillText((pokemon.nom), 225, 565);
+        context.fillText((pokemon.nom), 180, 540);
 }
