@@ -31,6 +31,7 @@ let creditsound = new Audio('credits.mp3');
 //variables pour contenir les id des setInterval pour pouvoir les clear et donc arrêter les répétitions
 let MENU_Interval_ID
 let Credits_Interval_ID
+let Fast_Interval_ID
 //
 
 
@@ -78,7 +79,6 @@ let casep;
 //
 
 menus = function(){
-    console.log(MENU_Interval_ID)
 	
     window.onclick = () => Gamerunning = true
     
@@ -134,7 +134,6 @@ menus = function(){
 					context.drawImage(titlescreen,0,0,canvas.width,canvas.height);
 					context.drawImage(mob,0,0, 100, 100);
 					context.drawImage(mob,700,500, 100, 100);
-					console.log(MENU_Interval_ID)
 				}
             }
 
@@ -159,12 +158,10 @@ menus = function(){
 					audio.play()
 				}
 				window.onclick = () => {
+					gener.pause();
 					context.clearRect(0, 0, canvas.width, canvas.height);
 					clearInterval(MENU_Interval_ID)
-					console.log(MENU_Interval_ID)
-					context.drawImage(titlescreen,0,0,canvas.width,canvas.height);
-					context.drawImage(mob,0,0, 100, 100);
-					context.drawImage(mob,700,500, 100, 100);
+					Fast_Interval_ID=setInterval(test,10)
 				}
             }
 			
@@ -191,7 +188,6 @@ menus = function(){
 				window.onclick = () => {
 					context.clearRect(0, 0, canvas.width, canvas.height);
 					clearInterval(MENU_Interval_ID)
-					console.log(MENU_Interval_ID)
 					context.drawImage(titlescreen,0,0,canvas.width,canvas.height);
 					context.drawImage(mob,0,0, 100, 100);
 					context.drawImage(mob,700,500, 100, 100);
@@ -227,10 +223,8 @@ menus = function(){
 				window.onclick = () => {
 					gener.pause();
 					context.clearRect(0, 0, canvas.width, canvas.height);
-					console.log(MENU_Interval_ID)
 					clearInterval(MENU_Interval_ID)
 					Credits_Interval_ID=setInterval(credits,10);
-					credits();
 				}
             }
 			if((casep!="blue")&(casep!="red")&(casep!="green")&(casep!="salmon")) //si souris en dehors des zones de textes de couleur...
@@ -238,8 +232,6 @@ menus = function(){
 				prtaudio=10;
 			}
 			casep="vide";
-			console.log(posSourisX)
-			console.log(posSourisY)
         }
         
     }
@@ -258,7 +250,6 @@ menus = function(){
     }
     
 }
-console.log(MENU_Interval_ID)
 
 //crédits affiche un écran fixe (à agrémenter par la suite) qu'on peut quitter en cliquant
 
@@ -275,4 +266,45 @@ credits = function()
 		creditsound.currentTime = 0;
 		gener.play();
 	}
+}	
+let PV=100;
+test = function()
+{
+	context.clearRect(0,0,canvas.width,canvas.height);
+	context.fillStyle='yellow';
+	context.font = "bold 50px courier";
+	context.fillText('Il faut partir', 0, 30,100);
+	console.log(posSourisX,posSourisY)
+	context.fillText(PV,150,30)
+	if((posSourisX<100)&(posSourisY<40))
+	{
+		window.onclick =() => {
+			clearInterval(Fast_Interval_ID)
+			MENU_Interval_ID=setInterval(menus,10);
+			creditsound.pause();
+			creditsound.currentTime = 0;
+			gener.play();
+		}
+	}
+	else if(posSourisY<300)
+	{
+		window.onclick =() => {
+			PV=PV+10
+			if(PV>100)
+			{
+				PV=100
+			}
+		}
+	}
+	else if(posSourisY>300)
+	{
+		window.onclick =() => {
+			PV=PV-10
+		}
+	}
+	else{
+		window.onclick =() =>{}
+	}
+	context.fillRect(300, 300, 300*PV/100, 40);
+	
 }	
