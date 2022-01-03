@@ -61,8 +61,9 @@ choix = function(){
 
 		// Dessine un rectangle pour former le cadre du pokemon
 		let lineaire = context.createLinearGradient(175, 130, 450, 350);
-		lineaire.addColorStop(0,'#BB0B0B');
-        lineaire.addColorStop(1, 'white');
+		//lineaire.addColorStop(0,'#BB0B0B');
+		lineaire.addColorStop(0,'#ffffff');
+        lineaire.addColorStop(1, '#dddddd');
         context.fillStyle = lineaire;
         context.fillRect(175, 130, 450, 350);
 
@@ -74,7 +75,7 @@ choix = function(){
 		lineaire = context.createLinearGradient(160, 500, 485, 60);
 		//lineaire.addColorStop(0,'#0062cc');
         //lineaire.addColorStop(1, '#0022bb');
-		lineaire.addColorStop(0, '#cccccc');
+		lineaire.addColorStop(0, '#0062cc');
 		lineaire.addColorStop(1, '#0022bb');
         context.fillStyle = lineaire;
         context.fillRect(160, 500,485, 60);
@@ -137,12 +138,18 @@ choix = function(){
 			//affichage d'un rectangle avec transparence 
 			context.globalAlpha = 0.4;
 			let lineaire = context.createLinearGradient(175, 130, 450, 350);
-			lineaire.addColorStop(0,'#850606');
-			lineaire.addColorStop(1, '#f0f0f0');
+			//lineaire.addColorStop(0,'#850606');
+			//lineaire.addColorStop(1, '#f0f0f0');
+			lineaire.addColorStop(0,'#ffffff');
+			lineaire.addColorStop(1, '#dddddd');
 			context.fillStyle = lineaire;
-			context.fillRect(175, 130, 450, 350);
+			context.fillRect(175, 250, 450, 230);
 			context.globalAlpha = 1;
-
+			
+			 lineaire = context.createLinearGradient(175, 130, 450, 350);
+			lineaire.addColorStop(0,'#dfdfdf');
+			lineaire.addColorStop(1, '#b0b0b0');
+			context.fillStyle = lineaire;
 			//Affichage des attaques
 			let attaques = pokemon.getAttaques();
 			context.fillRect(200, 250, 185, 85);
