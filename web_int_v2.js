@@ -1,0 +1,142 @@
+//box
+//var context;
+const canvas = document.querySelector('canvas');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+var terrain = new Image();
+	terrain.src = "int_pics/battleground.jpg";
+
+var pk1 = new Image();
+    pk1.src = "int_pics/vaporeon_dos.png";
+
+var pk2 = new Image();
+	pk2.src = "int_pics/flareon.png";
+
+// sur l interface
+var backgroundInt = new Image();
+	backgroundInt.src = "int_pics/fond_int.png"; // le Background de l'interface
+var btnAtk = new Image();
+	btnAtk.src = "int_pics/but_attack.png"; 
+var btnBag = new Image();
+	btnBag.src = "int_pics/but_bag.png";
+var btnSwap = new Image();
+	btnSwap.src = "int_pics/but_pokemon.png";
+var btnFlee = new Image();
+	btnFlee.src = "int_pics/but_escape.png"; 
+
+// Mouse positions
+let posSourisX = 0;
+let posSourisY = 0;
+
+let INT_Interval_ID;
+let ATK_Interval_ID;
+
+function mouse_position(event) //permet de relever la position de la souris via une balise onmousemove dans l'html
+{
+	posSourisX = event.offsetX;
+	posSourisY = event.offsetY;
+}
+
+function addInterface() {					// espace de travail (100, 700, 1300, 300);
+
+	context = canvas.getContext("2d");
+	context.drawImage(backgroundInt,400,710, 600, 280);
+
+	context.drawImage(btnAtk,500,715, 400, 160);
+	context.drawImage(btnBag,405,885, 190, 80);
+	context.drawImage(btnSwap,805,885, 190, 80);
+	context.drawImage(btnFlee,605,905, 190, 80);
+
+	console.log(posSourisX,posSourisY);
+
+	if((posSourisX>499)&(posSourisX<901)&(posSourisY>714)&(posSourisY<876)) //si la souris se trouve dans la zone btn ATK
+			{
+				console.log(window);
+				window.onclick = () => {
+					clearInterval(INT_Interval_ID)
+					ATK_Interval_ID=setInterval(FonctionAttaque,10);
+				}
+			}
+	if((posSourisX>404)&(posSourisX<596)&(posSourisY>884)&(posSourisY<966))		//bag
+	{
+		window.onclick = () => {
+		}
+	}
+	if((posSourisX>804)&(posSourisX<996)&(posSourisY>884)&(posSourisY<966))		//swap
+	{
+		window.onclick = () => {
+		}
+	}	
+	if((posSourisX>604)&(posSourisX<796)&(posSourisY>904)&(posSourisY<986))		// flee
+	{
+		window.onclick = () => {
+		}
+	}
+	// écouteur sur les boutons
+	//btnAtk.onclick = FonctionAttaque();				// Déterminer quand est-ce que ça clique
+	//btnBag.onPress = NotDevelopedYet;
+	//btnSwap.onPress = NotDevelopedYet;
+	//btnFlee.onPress = NotDevelopedYet;
+
+}
+
+function FonctionAttaque() {	
+
+	context.clearRect(400,710, 600, 280);	// on clear la zone d'interface			//le clear fonctionne, mais s'active tout seul
+
+	context = canvas.getContext("2d");
+	context.drawImage(backgroundInt,400,710, 600, 280);						// on re dessine illico la zone
+
+	context.drawImage(btnAtk,410,720, 285, 125);
+	context.drawImage(btnAtk,705,720, 285, 125);
+	context.drawImage(btnAtk,410,855, 285, 125);
+	context.drawImage(btnAtk,705,855, 285, 125);
+	
+	// écouteur sur les boutons
+	//Atk1.onPress = FonctionAttaque1;
+	//Atk2.onPress = FonctionAttaque2;
+	//Atk3.onPress = FonctionAttaque3;
+	//Atk4.onPress = FonctionAttaque4;
+}
+
+window.onload = function()	{	// At start
+
+const white = canvas.getContext('2d');
+white.fillStyle= 'rgba(255,255,255)';
+white.fillRect(100, 0, 1150, 540);
+ 
+const background = canvas.getContext("2d");	
+background.drawImage(terrain,100,0, 1150, 540);
+
+context = canvas.getContext("2d");	
+context.drawImage(pk1,300,210, 300, 300);
+context.drawImage(pk2,780,140, 200, 200);
+
+const text_box = canvas.getContext('2d');
+text_box.fillStyle= 'rgba(0,0,0)';
+text_box.fillRect(100, 540, 1150, 140);
+
+const Interface_cbt = canvas.getContext('2d');	// l inteface qui accueille les boutons
+Interface_cbt.fillStyle= 'rgba(200,200,200)';
+Interface_cbt.fillRect(100, 680, 1150, 320);
+
+INT_Interval_ID=setInterval(addInterface,10);	// a developper....
+}
+		
+
+
+// le repertoire des id des images
+/*
+var imgInterfaceRepertoireId;						a faire fonctionner
+
+imgInterfaceRepertoireId = [
+	{src:"int_pics/but_attack.png", id:"btnAtk"},		
+	{src:"int_pics/but_bag.png", id:"btnBag"},
+	{src:"int_pics/but_pokemon.png", id:"btnSwap"},
+	{src:"int_pics/but_escape.png", id:"btnFlee"},
+	{src:"int_pics/fond_int.png", id:"fondInt"}
+	//à remplir avec les boutons colorés selon le type des attaques
+];	
+*/
