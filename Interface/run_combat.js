@@ -34,10 +34,7 @@ combats = function()
 	context.fillRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
 
     if (!combat_init){
-        if (choix_pokemons==null){
-		    choix_pokemons = Pokemons();
-	    }
-        let possibilites = choix_pokemons;
+        let possibilites = Pokemons();
         let random = Math.floor(Math.random() * possibilites.length);
         adversaire=possibilites[random];
 
