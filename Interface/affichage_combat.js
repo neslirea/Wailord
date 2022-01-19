@@ -28,7 +28,7 @@ function AfficherDegats(isUser, PVperdus){
 	}
 }
 
-function AfficherManque(){
+function AfficherManque(){                                 
 	context.font = "bold 40px courier";
 	context.fillStyle='black';
 	context.fillText("Mais cela échoue !", 300, 270);
