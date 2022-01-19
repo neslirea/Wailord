@@ -9,7 +9,7 @@ let combat_main_interval_ID;
 let combat_user_Interval_ID;
 
 let current_pkm;
-let current_atk	
+let current_atk;
 
 const combat_hauteur_menu = 200;
 const combat_marge = 10;
@@ -28,7 +28,7 @@ const combat_ratio_menu = 0.4;
         2 secondes
 */
 combats = function()
-{    
+{    	
     //window.onclick = () => Gamerunning = true
     context.fillStyle = "grey";		
 	context.fillRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
@@ -44,6 +44,7 @@ combats = function()
         combat_init=true;
     }
     setTimeout(Deb_Tour, 1000);
+    AfficherCombat();
 }	
 
 Deb_Tour = function(){
@@ -63,7 +64,8 @@ Deb_Tour = function(){
             context.fillText("Vous avez perdu...", 300, 170);
         }
         //permet au bout de 1 secondes de pouvoir cliquer pour passer à l'autre écran
-        setTimeout(() => {
+        setTimeout(() => {            
+            choix_pokemons = null;
 	        context.drawImage(skip,canvas.width-50,canvas.height-50,50,50);
             //console.log("this is the first message");
             window.onclick = () => {
@@ -74,12 +76,13 @@ Deb_Tour = function(){
     } else {    //si non, on lance un tour
         //On commence par saisir le choix utilisateur, ce qui lancera ensuite le tour
         combat_choix_fait = false;
-        combat_user_Interval_ID = setInterval(Combat_Choix, 40);
+        combat_user_Interval_ID = setInterval(Combat_Choix, 100);
     }
 }
 
 Combat_Choix = function(){
     //11111
+    AfficherCombat();
     console.log("Choix");
 	context.clearRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
     context.fillStyle = "grey";		 
@@ -131,7 +134,7 @@ Combat_Choix = function(){
                 let att2 = ChoixIA();
                 //on lance le tour
                 Tour(att1, att2);
-            }, 100);
+            }, 1000);
         }
     } else {
         //sinon
@@ -209,7 +212,7 @@ Attaque = function(Attaquant, Defenseur, Attaque){
         //Si oui, on inflige les dégats et on affiche
         if(random<=Preussite){
             //Nombre aléatoire entre 0.85 et 1
-            let CM = Math.floor(Math.random() * 15)/100+0.85;
+            let CM = Math.floor(Math.random() * 15.)/100.+0.85;
             //STAB
             if(Attaquant.type===Attaque.type){
                 CM *= 1.5;
@@ -224,9 +227,14 @@ Attaque = function(Attaquant, Defenseur, Attaque){
             }, combat_duree_affichage)
 
             let Niv = 50;
-            let PVperdus =(20*0.4+2)*Attaquant.atk+Attaque.puissance
+            let PVperdus =(Niv*0.4+2)*Attaquant.atk*Attaque.puissance
             PVperdus = PVperdus / (Defenseur.def*50) +2
             PVperdus *= CM;
+            console.log("puissance attaque "+Attaque.puissance);
+            console.log("def pkm "+Defenseur.def);
+            console.log("atk pkm "+Attaquant.atk);
+            console.log("pv perdus "+PVperdus);
+            console.log("cm "+CM);
 
             Defenseur.pv = Math.floor(Defenseur.pv-PVperdus);
             

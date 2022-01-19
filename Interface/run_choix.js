@@ -9,7 +9,8 @@ let choix_current = 0;
 
 choix = function(){
     //console.log(MENU_Interval_ID)
-	
+	let width = canvas.width;
+	let height = canvas.height;
     
 	window.onclick = () => Gamerunning = true
     
@@ -30,11 +31,11 @@ choix = function(){
 		lineaire.addColorStop(0,'#ffffff');
         lineaire.addColorStop(1, '#dddddd');
         context.fillStyle = lineaire;
-        context.fillRect(175, 130, 450, 350);
+        context.fillRect(0.20*width, 0.20*height, 0.60*width, 0.60*height);
 
 		//Affiche les deux flèches
-		triangle("#FFE800","#0062cc",700, 750, 292, 367);
-		triangle("#FFE800","#0062cc",100, 50, 292, 367);
+		triangle("#FFE800","#0062cc",0.86*width, 0.93*width, 0.43*height, 0.57*height);
+		triangle("#FFE800","#0062cc",0.14*width, 0.07*width, 0.43*height, 0.57*height);
 
 		// Dessine un rectangle pour former le bouton sélection
 		lineaire = context.createLinearGradient(160, 500, 485, 60);
@@ -43,32 +44,31 @@ choix = function(){
 		lineaire.addColorStop(0, '#0062cc');
 		lineaire.addColorStop(1, '#0022bb');
         context.fillStyle = lineaire;
-        context.fillRect(160, 500,485, 60);
+        context.fillRect(width/2-485/2, 0.85*height, 485, 60);
 
 		//affichage du Pokemon
 		let pokemon = choix_pokemons[choix_current]
 		let image = new Image();
 		image.src = "Sprites_Pokemon/"+pokemon.sprite;
-		context.drawImage(image,225, 180, 375, 350); //affichage du pokemon
+		context.drawImage(image, 0.5*width-0.58*height/2+10, 0.30*height, 0.58*height, 0.58*height); //affichage du pokemon
 		let type = new Image();
 		type.src = "Sprites_Menus/"+pokemon.type+".png";
-		context.drawImage(type,375, 185, 50, 50); //affichage du pokemon
+		context.drawImage(type,0.47*width, 0.30*height, 0.06*width, 0.06*width); //affichage du type du pokemon
 		context.font = "bold 40px courier";
         context.fillStyle='black';
-        context.fillText((pokemon.nom), 300, 170);
+        context.fillText((pokemon.nom), 0.44*width, 0.28*height);
 
 		//affichage de texte et de ses paramètres
         context.font = "bold 50px courier";
         context.fillStyle='black';
-        context.fillText(('CHOIX DU POKEMON'), 160, 80);
+        context.fillText(('CHOIX DU POKEMON'), width/2-490/2, 0.13*height);
 		context.font = "30px courier";
-        context.fillText(('SELECTIONNER CE POKEMON'), 190, 540);
+        context.fillText(('SELECTIONNER CE POKEMON'), width/2-485/2+30,  0.85*height+40);
 
 		//si on est dans la zone du triangle 1
-        if((posSourisX>40)&(posSourisX<110)&(posSourisY>282)&(posSourisY<377)) //si la souris se trouve dans cette zone...
+        if((posSourisX>0.86*width)&(posSourisX< 0.93*width)&(posSourisY>0.43*height)&(posSourisY<0.57*height)) //si la souris se trouve dans cette zone...
 		{
-			casep ="blue";			
-			triangle("#FFCD01","0055b3",100, 50, 292, 367);
+			triangle("#FFCD01","#0055b3",0.86*width, 0.93*width, 0.43*height, 0.57*height);		
 				
 			//SUR CLICK, TRANSITION VERS UN AUTRE Pokemon				
 			window.onclick = () => {
@@ -81,10 +81,9 @@ choix = function(){
 		}	
 
 		//si on est dans la zone du triangle 2
-        if((posSourisX>690)&(posSourisX<760)&(posSourisY>282)&(posSourisY<377)) //si la souris se trouve dans cette zone...
-		{
-			casep ="blue";			
-			triangle("#FFCD01","0055b3",700, 750, 292, 367);
+        if((posSourisX>0.07*width)&(posSourisX<0.14*width)&(posSourisY>0.43*height)&(posSourisY<0.57*height)) //si la souris se trouve dans cette zone...
+		{	
+			triangle("#FFCD01","#0055b3",0.14*width, 0.07*width, 0.43*height, 0.57*height);
 				
 			//SUR CLICK, TRANSITION VERS UN AUTRE Pokemon				
 			window.onclick = () => {
@@ -97,9 +96,8 @@ choix = function(){
 		}	
 			
 		//gestion du déplacement à la souris sur l'image dans le pok
-        if((posSourisX>175)&(posSourisX<625)&(posSourisY>130)&(posSourisY<470)) //si la souris se trouve dans cette zone...
+        if((posSourisX>0.20*width)&(posSourisX<0.80*width)&(posSourisY>0.20*height)&(posSourisY<0.80*height)) //si la souris se trouve dans cette zone...
 		{
-			casep ="blue";			
 			//affichage d'un rectangle avec transparence 
 			context.globalAlpha = 0.4;
 			let lineaire = context.createLinearGradient(175, 130, 450, 350);
@@ -108,65 +106,80 @@ choix = function(){
 			lineaire.addColorStop(0,'#ffffff');
 			lineaire.addColorStop(1, '#dddddd');
 			context.fillStyle = lineaire;
-			context.fillRect(175, 250, 450, 230);
+			context.fillRect(0.20*width, 0.20*height, 0.60*width, 0.60*height);
 			context.globalAlpha = 1;
 			
-			 lineaire = context.createLinearGradient(175, 130, 450, 350);
+			lineaire = context.createLinearGradient(175, 130, 450, 350);
 			lineaire.addColorStop(0,'#dfdfdf');
 			lineaire.addColorStop(1, '#b0b0b0');
 			context.fillStyle = lineaire;
 			//Affichage des attaques
 			let attaques = pokemon.getAttaques();
-			context.fillRect(200, 250, 185, 85);
-			context.fillRect(415, 250, 185, 85);
-			context.fillRect(200, 350, 185, 85);
-			context.fillRect(415, 350, 185, 85);
+			let att_width = 0.195*width;
+			let att_height = 0.14*height;
+			let att_marge = 0.07*width;
+			let att_x0 = 0.25*width;
+			let att_x1 = 0.535*width;
+			let att_y0 = 0.36*height;
+			let att_y1 = 0.60*height;
+			context.fillRect(att_x0, att_y0, att_width, att_height);
+			context.fillRect(att_x1, att_y0, att_width, att_height);
+			context.fillRect(att_x0, att_y1, att_width, att_height);
+			context.fillRect(att_x1, att_y1, att_width, att_height);
 			//affichage de l'attaque 1
 			if (attaques.length>=1){				
-				context.fillStyle = "white";				
-				context.fillRect(200, 250, 185, 85);
+				context.fillStyle = "white";			
+				context.fillRect(att_x0, att_y0, att_width, att_height);
 				context.font = "bold 18px courier";
 				context.fillStyle='black';
-				context.fillText((attaques[0].nom), 230, 280);
+				context.fillText((attaques[0].nom), att_x0+80, att_y0+60);
+				type.src = "Sprites_Menus/"+attaques[0].type+".png";
+				context.drawImage(type,att_x0+10, att_y0+20, 0.04*width, 0.04*width); //affichage du type du pokemon
 			}
 			if (attaques.length>=2){				
-				context.fillStyle = "white";				
-				context.fillRect(415, 250, 185, 85);
+				context.fillStyle = "white";			
+				context.fillRect(att_x1, att_y0, att_width, att_height);
 				context.font = "bold 18px courier";
 				context.fillStyle='black';
-				context.fillText((attaques[1].nom), 445, 280);
+				context.fillText((attaques[1].nom), att_x1+80, att_y0+60);
+				type.src = "Sprites_Menus/"+attaques[1].type+".png";
+				context.drawImage(type,att_x1+10, att_y0+20, 0.04*width, 0.04*width); //affichage du type du pokemon
 			}
 			if (attaques.length>=3){				
-				context.fillStyle = "white";				
-				context.fillRect(200, 350, 185, 85);
+				context.fillStyle = "white";			
+				context.fillRect(att_x0, att_y1, att_width, att_height);
 				context.font = "bold 18px courier";
 				context.fillStyle='black';
-				context.fillText((attaques[2].nom), 230, 375);
+				context.fillText((attaques[2].nom), att_x0+80, att_y1+60);
+				type.src = "Sprites_Menus/"+attaques[2].type+".png";
+				context.drawImage(type,att_x0+10, att_y1+20, 0.04*width, 0.04*width); //affichage du type du pokemon
 			}
 			if (attaques.length>=4){				
-				context.fillStyle = "white";				
-				context.fillRect(415, 350, 185, 85);
+				context.fillStyle = "white";		
+				context.fillRect(att_x1, att_y1, att_width, att_height);
 				context.font = "bold 18px courier";
 				context.fillStyle='black';
-				context.fillText((attaques[3].nom), 445, 375);
+				context.fillText((attaques[3].nom), att_x1+80, att_y1+60);
+				type.src = "Sprites_Menus/"+attaques[3].type+".png";
+				context.drawImage(type,att_x1+10, att_y1+20, 0.04*width, 0.04*width); //affichage du type du pokemon
 			}
 		}		
 		
 		//gestion du déplacement à la souris sur le bouton SELECT (160, 500, 485, 60)
-        if((posSourisX>160)&(posSourisX<660)&(posSourisY>485)&(posSourisY<545)) //si la souris se trouve dans cette zone...
-		{
-			casep ="blue";			
+        if((posSourisX>(width/2-485/2))&(posSourisX<(width/2+485/2))&(posSourisY>(0.85*height))&(posSourisY<(0.85*height+60))) //si la souris se trouve dans cette zone...
+		{	
 			//affichage d'un rectangle avec transparence 
 			// Dessine un rectangle pour former le bouton sélection
+			/*
 			lineaire = context.createLinearGradient(160, 500, 485, 60);
 			lineaire.addColorStop(0,'#0062cc');
 			lineaire.addColorStop(1, '#0022bb');
 			context.fillStyle = lineaire;
-			context.fillRect(160, 500, 485, 60);
+			context.fillRect(160, 500, 485, 60);*/
 			context.font = "bold 30px courier";
 			
 			context.fillStyle = "black";
-			context.fillText(('SELECTIONNER CE POKEMON'), 190, 540);
+			context.fillText(('SELECTIONNER CE POKEMON'), width/2-485/2+30,  0.85*height+40);
 				
 			//SUR CLICK, TRANSITION VERS UN AUTRE ECRAN (COMBAT)				
 			window.onclick = () => {

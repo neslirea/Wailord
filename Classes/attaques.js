@@ -1,8 +1,7 @@
 class Capacite{
-    constructor(nom, type, vitesse, precision, puissance){
+    constructor(nom, type, puissance, precision){
         this.nom = nom;
         this.type = type;
-        this.vitesse = vitesse;
         this.precision = precision;
         this.puissance = puissance;
     } 
