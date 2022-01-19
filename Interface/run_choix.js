@@ -174,6 +174,7 @@ choix = function(){
 					context.clearRect(0, 0, canvas.width, canvas.height);
 					//console.log(MENU_Interval_ID)
 					clearInterval(CHOIX_Interval_ID)
+					choix_pokemons = null;
 					combats();
 			}
 		}	
