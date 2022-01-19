@@ -1,42 +1,10 @@
 
-let charmander = new Image(); //image pour le menu
-	charmander.src = "Sprites_Pokemon/charmander.png";
-	/*
-function mouse_position(event){
-	posSourisX = event.offsetX;
-	posSourisY = event.offsetY;
-};
+let CHOIX_Interval_ID;
+//
+let choix_flag = false;
 
-//le background ici ne nous sert pas pour l'instant, voir il ne nous servira pas donc éléments à retirer éventuellement
-window.onload = function()		// At start
-{
-let backgroundCanvas;
-    
-    //init background for collision test
-    backgroundCanvas = document.createElement( "canvas" );
-    // Adjust backgroundCanvas size at window's size
-    //backgroundCanvas.width = window.innerWidth;
-    //backgroundCanvas.height = window.innerHeight;
-    // Init backgroundContext for collision test
-    backgroundContext = backgroundCanvas.getContext("2d");
-    
-    //init our canvas and graphic context
-    canvas = document.getElementById("myCanvas");
-    
-    // Adjust backgroundCanvas size at window's size
-    //canvas.width = window.innerWidth;
-    //canvas.height = window.innerHeight;
-	
-    // Init context to draw the game
-    context = canvas.getContext("2d");
-	
-    MENU_Interval_ID=setInterval(choix,10); //répétitions toutes les 10ms de la fonction menus   
-}
-*/
-let flag = false;
-
-let pokemons = null;
-let current = 0;
+let choix_pokemons = null;
+let choix_current = 0;
 //
 
 choix = function(){
@@ -51,14 +19,11 @@ choix = function(){
 
 		// Affichage des pokémons
 		let x = 180;
-		if (pokemons==null){
-			pokemons = Pokemons();
-			current = 0;
+		if (choix_pokemons==null){
+			choix_pokemons = Pokemons();
+			choix_current = 0;
 		}
-		pokemons.forEach((pokemon)=>{
-
-		})
-
+		current_pkm = choix_pokemons[choix_current]
 		// Dessine un rectangle pour former le cadre du pokemon
 		let lineaire = context.createLinearGradient(175, 130, 450, 350);
 		//lineaire.addColorStop(0,'#BB0B0B');
@@ -81,7 +46,7 @@ choix = function(){
         context.fillRect(160, 500,485, 60);
 
 		//affichage du Pokemon
-		let pokemon = pokemons[current]
+		let pokemon = choix_pokemons[choix_current]
 		let image = new Image();
 		image.src = "Sprites_Pokemon/"+pokemon.sprite;
 		context.drawImage(image,225, 180, 375, 350); //affichage du pokemon
@@ -107,10 +72,10 @@ choix = function(){
 				
 			//SUR CLICK, TRANSITION VERS UN AUTRE Pokemon				
 			window.onclick = () => {
-				if (current==pokemons.length-1){
-					current=0;
+				if (choix_current==choix_pokemons.length-1){
+					choix_current=0;
 				} else {
-					current+=1;
+					choix_current+=1;
 				}
 			}
 		}	
@@ -123,10 +88,10 @@ choix = function(){
 				
 			//SUR CLICK, TRANSITION VERS UN AUTRE Pokemon				
 			window.onclick = () => {
-				if (current==0){
-					current=pokemons.length-1;
+				if (choix_current==0){
+					choix_current=choix_pokemons.length-1;
 				} else {
-					current-=1;
+					choix_current-=1;
 				}
 			}
 		}	
@@ -205,22 +170,20 @@ choix = function(){
 				
 			//SUR CLICK, TRANSITION VERS UN AUTRE ECRAN (COMBAT)				
 			window.onclick = () => {
-				context.clearRect(0, 0, canvas.width, canvas.height);
-				clearInterval(MENU_Interval_ID)
-				context.drawImage(titlescreen,0,0,canvas.width,canvas.height);
-				context.drawImage(mob,0,0, 100, 100);
-				context.drawImage(mob,700,500, 100, 100);
-				console.log(MENU_Interval_ID)
+					gener.pause();
+					context.clearRect(0, 0, canvas.width, canvas.height);
+					//console.log(MENU_Interval_ID)
+					clearInterval(CHOIX_Interval_ID)
+					combats();
 			}
 		}	
-
-
 
 			/* AFFICHAGE DE LA POS SOURIS (debug)
 			console.log(posSourisX)
 		console.log(posSourisY)*/
         
     }
+	//inutile : affiche un écran d'acceuil s il s'agit du premier écran
     else{
         context.clearRect(0, 0, canvas.width, canvas.height); //nettoyage du canvas
 		context.drawImage(titlescreen,0,0,canvas.width,canvas.height); //affichage de titlescreen
@@ -229,25 +192,9 @@ choix = function(){
 		context.fillStyle='yellow';
         context.font = "bold 50px courier";
         context.fillText('Click to select a pokemon', 180, 590);
-
-		
     }
     
 }
-
-//crédits affiche un écran fixe (à agrémenter par la suite) qu'on peut quitter en cliquant
-
-credits = function()
-{
-	context.drawImage(title,0,0,canvas.width,300);
-	creditsound.play();
-	context.fillStyle='black';
-	context.fillText('Click to skip', 180,35);
-	window.onclick =() => {
-		clearInterval(Credits_Interval_ID)
-		MENU_Interval_ID=setInterval(choix,10);
-	}
-}	
 
 let triangle = function(col1, col2, x1, x2, y1, y2){
 	context.fillStyle = col1;

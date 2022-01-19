@@ -12,6 +12,7 @@ Pokemons = function(){
 
 	poke1.ajouterAttaque(atk1);
 	poke3.ajouterAttaque(atk2);
+	poke2.ajouterAttaque(atk2);
 	poke3.ajouterAttaque(atk3);
 	let a = [poke1, poke2, poke3];
 	

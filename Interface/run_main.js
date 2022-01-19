@@ -157,9 +157,10 @@ menus = function(){
 				window.onclick = () => {
 					gener.pause();
 					context.clearRect(0, 0, canvas.width, canvas.height);
-					console.log(MENU_Interval_ID)
+					//console.log(MENU_Interval_ID)
 					clearInterval(MENU_Interval_ID)
-					MENU_Interval_ID=setInterval(choix,10);
+					CHOIX_Interval_ID=setInterval(choix,10);
+					choix();
 				}
             }
 

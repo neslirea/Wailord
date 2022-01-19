@@ -1,26 +1,260 @@
+let combat_init = false;
+let combat_transit = true ;
+let combat_objet = null;
+let adversaire = null;
 
-let Button = document.getElementById("Valider");
-Button.addEventListener("click", Input); 
+const combat_duree_affichage = 1000;
+let combat_main_interval_ID;
+
+let combat_user_Interval_ID;
+
+let current_pkm;
+let current_atk	
+
+const combat_hauteur_menu = 200;
+const combat_marge = 10;
+const combat_ratio_menu = 0.4;
+/*
+//Déroulement du comabt :
+    -> affichage des attaques + choix de l'attaques
+        durée indeterminée
+    -> affichage du texte 1  
+        2 secondes ou on click
+    -> affichage de l'attaque et réduction des pvs
+        2 secondes
+    -> affichage du texte 1  
+        2 secondes ou on click
+    -> affichage de l'attaque et réduction des pvs
+        2 secondes
+*/
+combats = function()
+{    
+    //window.onclick = () => Gamerunning = true
+    context.fillStyle = "grey";		
+	context.fillRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
+
+    if (!combat_init){
+        if (choix_pokemons==null){
+		    choix_pokemons = Pokemons();
+	    }
+        let possibilites = choix_pokemons;
+        let random = Math.floor(Math.random() * possibilites.length);
+        adversaire=possibilites[random];
+
+        context.font = "bold 40px courier";
+        context.fillStyle='black';
+        context.fillText(current_pkm.nom +" contre "+ adversaire.nom, 100, 170);
+        combat_init=true;
+    }
+    setTimeout(Deb_Tour, 1000);
+}	
+
+Deb_Tour = function(){
+	context.clearRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = "grey";		
+	context.fillRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
+    //11111
+    console.log("Deb_Tour");
+    //On regarde si le combat est fini
+    if(current_pkm.pv==0||adversaire.pv==0){
+        //si oui, on affiche le résultat puis on passe à l'écran des crédits
+        if (current_pkm.pv>0){
+		    context.clearRect(0, 0, canvas.width, canvas.height);
+            context.fillText("Vous avez gagné !", 300, 170);
+        } else {
+		    context.clearRect(0, 0, canvas.width, canvas.height);
+            context.fillText("Vous avez perdu...", 300, 170);
+        }
+        //permet au bout de 1 secondes de pouvoir cliquer pour passer à l'autre écran
+        setTimeout(() => {
+	        context.drawImage(skip,canvas.width-50,canvas.height-50,50,50);
+            //console.log("this is the first message");
+            window.onclick = () => {
+		    Credits_Interval_ID=setInterval(credits,10);
+		    credits();		
+            }    
+        }, 1000);
+    } else {    //si non, on lance un tour
+        //On commence par saisir le choix utilisateur, ce qui lancera ensuite le tour
+        combat_choix_fait = false;
+        combat_user_Interval_ID = setInterval(Combat_Choix, 40);
+    }
+}
+
+Combat_Choix = function(){
+    //11111
+    console.log("Choix");
+	context.clearRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
+    context.fillStyle = "grey";		 
+	context.fillRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
+    window.onclick = () => {}
+    //Affiche les possibilités
+    AffichageChoixAttaque(current_pkm);
+    
+    // zone de choix
+    let y0 = canvas.height-combat_hauteur_menu+combat_marge
+	let y1 = canvas.height-combat_marge
+	let x0 = canvas.width*(1-combat_ratio_menu)+combat_marge
+	let x1 = canvas.width-combat_marge
+	let lineaire = context.createLinearGradient(x0, y0, x1, y1);	
+    //taille des boîtes d'affichage des attaques
+	let width =  (x1-x0-3*combat_marge)/2
+	let height = (y1-y0-3*combat_marge)/2
+    
+    /*coordinates
+    context.fillRect(x0+marge, y0+marge, width, height);
+	context.fillRect(x0+width+2*marge, y0+marge, width, height);
+	context.fillRect(x0+marge, y0+height+2*marge, width, height);
+	context.fillRect(x0+width+2*marge, y0+height+2*marge, width, height);*/
+    // variable pour savoir si on est passé sur un des rectangles d'attaques et si oui lequel
+    let selected=-1;
+    if((posSourisX>x0+combat_marge)&(posSourisX<x0+combat_marge+width)&(posSourisY>y0+combat_marge)&(posSourisY<y0+combat_marge+height)){
+        window.onclick = () => {};
+        selected=0;
+    } else if ((posSourisX>x0+width+2*combat_marge)&(posSourisX<x0+width+2*combat_marge+width)&(posSourisY>y0+combat_marge)&(posSourisY<y0+combat_marge+height)){
+        selected =1;
+    } else if ((posSourisX>x0+combat_marge)&(posSourisX<x0+combat_marge+width)&(posSourisY>y0+height+2*combat_marge)&(posSourisY<y0+height+2*combat_marge+height)){
+        selected =2;
+    } else if ((posSourisX>x0+width+2*combat_marge)&(posSourisX<x0+width+2*combat_marge+width)&(posSourisY>y0+height+2*combat_marge)&(posSourisY<y0+height+2*combat_marge+height)){
+        selected =3;
+    }
+    if ((selected!=-1)&(selected<=current_pkm.getAttaques().length-1)){
+        // si on est passé sur un des rectangles d'attaques
+        window.onclick = () => {
+            clearInterval(combat_user_Interval_ID);
+            context.clearRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
+            context.fillStyle = "grey";		
+	        context.fillRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
+            combat_choix_fait=true;
+            setTimeout(() => {
+            //On génère des évènements si on a bien sélectionné l'attaque :
+                //on arrête le timer
+                //on sélectionne l'attaque correspondant
+                let att1  = current_pkm.getAttaques()[selected];    
+                let att2 = ChoixIA();
+                //on lance le tour
+                Tour(att1, att2);
+            }, 100);
+        }
+    } else {
+        //sinon
+        window.onclick = () => {}
+    }
+}
+
+Tour = function(att1, att2)
+{ 
+    //11111
+    console.log("Tour");
+    let pokemon1 = current_pkm;
+        let pokemon2 = adversaire;
+        let isUserFirst = 1;
+        if (att1.vitesse==att2.vitesse){
+            if(pokemon1.vitesse==pokemon2.vitesse){
+                let random = Math.floor(Math.random() * 2);
+                if (random==0){
+                    isUserFirst = 0;
+                } else {
+                    isUserFirst = 1;
+                }
+            } else if(pokemon1.vitesse<pokemon2.vitesse){
+                isUserFirst = 0;
+            } else {
+                isUserFirst = 1;
+            }
+        }else if (att1.vitesse<att2.vitesse){
+            isUserFirst = 0;
+        }else {
+            isUserFirst =1;
+        }
+
+        // Soit il s'agit de l'IA, soit de l'utilisateur
+        if(isUserFirst==1){
+            // On effectue la première attaque
+            Attaque(pokemon1, pokemon2, att1);
+
+            //Si le pokemon en face n'a plus de PV, c'est la fin du combat        
+            //Sinon, on effectue la deuxième attaque
+            if (pokemon2.pv>0){
+                setTimeout(() => {
+                    Attaque(pokemon2, pokemon1, att2);
+                }, combat_duree_affichage*3);                
+            }
+
+        } else {
+            // On effectue la première attaque
+            Attaque(pokemon2, pokemon1, att2);
+
+            //Si le pokemon en face n'a plus de PV, c'est la fin du combat        
+            //Sinon, on effectue la deuxième attaque
+            if (pokemon1.pv>0){
+                setTimeout(() => {
+                    //context.clearRect(0, 0, canvas.width, canvas.height);
+                    Attaque(pokemon1, pokemon2, att1);
+                }, combat_duree_affichage*3);      
+            }
+        }
+        setTimeout(() => {
+            Deb_Tour();
+        },6*combat_duree_affichage)
+}
+
+Attaque = function(Attaquant, Defenseur, Attaque){
+        //Affichage de l attaque
+        AfficherAttaque(Attaquant,Attaque);
 
 
-/**
- * Fonction appelée dans la page de test des types 
- */
- function Input(){
-	 //nom, type, pv, atk, def, vitesse, precision, esquive)
-	let poke1 = new Pokemon("Carapuce", "", "", "Eau", 44, 48, 65, 43);
-	let poke2 = new Pokemon("Bulbizarre", "", "", "Plante", 45, 49, 49, 45);
-	let poke3 = new Pokemon("Salamèche", "", "", "Feu", 39, 52, 43, 65);
+        //On regarde si l'attaque touche
+        //Preussite = PREcapacité * PREattaquant/ PREdefenseur
+        let Preussite = Attaque.precision * Attaquant.precision / Defenseur.esquive;
 
-	//nom, type, vitesse, precision, puissance
-	let atk1 = new Capacite("Pistolet à O", "Eau", 25, 100, 40);
-	let atk2 = new Capacite("Fouet Lianes", "Plante", 25, 100, 45);
-	let atk3 = new Capacite("Flammèche", "Feu", 25, 100, 40);
+        let random = Math.random();
+        //Si oui, on inflige les dégats et on affiche
+        if(random<=Preussite){
+            //Nombre aléatoire entre 0.85 et 1
+            let CM = Math.floor(Math.random() * 15)/100+0.85;
+            //STAB
+            if(Attaquant.type===Attaque.type){
+                CM *= 1.5;
+            }
+            // efficacité de la capacité
+            let types = Singleton_types.getInstance();
 
-	poke1.ajouterAttaque(atk1);
-	poke3.ajouterAttaque(atk2);
-	poke3.ajouterAttaque(atk3);
+            CM *= types.effets(Attaque.type, Defenseur.type); 
+            //Affichage de l'éfficacité
+            setTimeout(()=>{
+                AfficherEfficacite(types.effets(Attaque.type, Defenseur.type));
+            }, combat_duree_affichage)
 
-	let combat = new Combat(poke1,poke3);
-	combat.Commencer();
+            let Niv = 50;
+            let PVperdus =(20*0.4+2)*Attaquant.atk+Attaque.puissance
+            PVperdus = PVperdus / (Defenseur.def*50) +2
+            PVperdus *= CM;
+
+            Defenseur.pv = Math.floor(Defenseur.pv-PVperdus);
+            
+            if (Defenseur.pv<0){
+                Defenseur.pv=0;
+            }
+            //affichage des dégats
+
+            setTimeout(() => {
+                AfficherDegats(Defenseur==current_pkm, PVperdus);
+
+                //console.log("this is the first message");
+ 
+            }, combat_duree_affichage*2);
+        } else {
+            //sinon, on affiche manqué
+            setTimeout(() => {
+                AfficherManque()
+            }, combat_duree_affichage*2);
+        }
+        
+    }
+ChoixIA = function(){
+        let possibilites = adversaire.getAttaques();
+        let random = Math.floor(Math.random() * possibilites.length);
+        
+        return possibilites[random];
 }

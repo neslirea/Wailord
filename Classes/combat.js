@@ -9,7 +9,11 @@ class Combat{
         // On lance des tours jusqu'à ce qu'un des deux pokémons n'aie plus de PV
        
         while ((this.pokemon1.pv>0)&&(this.pokemon2.pv>0)){
-            this.Tour();
+            //On choisit les attaques
+            let att1 = this.ChoixUser();
+            let att2 = this.ChoixIA();
+
+            this.Tour(att1, att2);
             const p = document.getElementById("Affichage");
             p.innerText += "\n" + this.pokemon1.nom +" : "+ this.pokemon1.pv +" PV \n";
             p.innerText += "" + this.pokemon2.nom +" : "+ this.pokemon2.pv +" PV \n\n";
@@ -18,10 +22,7 @@ class Combat{
         this.Fin();
     }
 
-    Tour(){
-        //On choisit les attaques
-        let att1 = this.ChoixUser();
-        let att2 = this.ChoixIA();
+    Tour(att1, att2){
 
         //On teste quel pokémon doit commencer (rapidité)
         /**
@@ -31,7 +32,7 @@ class Combat{
             une chance sur deux d'attaquer en premier.
         */
         let isUserFirst = 1;
-        if (att1.vitesse=att2.vitesse){
+        if (att1.vitesse==att2.vitesse){
             if(this.pokemon1.vitesse==this.pokemon2.vitesse){
                 let random = Math.floor(Math.random() * 2);
                 if (random==0){
@@ -133,6 +134,14 @@ class Combat{
         } else {
             alert("Vous avez perdu !");
         }
+    }
+
+    estFini(){
+        let res = false;
+        if(this.pokemon1.pv==0||this.pokemon2.pv==0){
+            res = true;
+        }
+        return res;
     }
 
 }
