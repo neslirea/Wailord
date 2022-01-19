@@ -17,6 +17,12 @@ let title = new Image(); //image pour le titre de l'écran titre
 	
 let chef = new Image(); //image pour le menu
 	chef.src = "red.png";
+
+let jaugeJ = new Image();
+	jaugeJ.src = "jaugej.png"
+	
+let jaugeE = new Image();
+	jaugeE.src = "jaugee.png"
 	
 // Mouse positions
 let posSourisX = 0;
@@ -267,7 +273,8 @@ credits = function()
 		gener.play();
 	}
 }	
-let PV=100;
+let PV1=100;
+let PV2=100;
 test = function()
 {
 	context.clearRect(0,0,canvas.width,canvas.height);
@@ -275,7 +282,8 @@ test = function()
 	context.font = "bold 50px courier";
 	context.fillText('Il faut partir', 0, 30,100);
 	console.log(posSourisX,posSourisY)
-	context.fillText(PV,150,30)
+	context.fillText(PV1,150,30)
+	context.fillText(PV2,300,30)
 	if((posSourisX<100)&(posSourisY<40))
 	{
 		window.onclick =() => {
@@ -289,22 +297,67 @@ test = function()
 	else if(posSourisY<300)
 	{
 		window.onclick =() => {
-			PV=PV+10
-			if(PV>100)
+			PV1=PV1+10
+			if(PV1>100)
 			{
-				PV=100
+				PV1=100
+			}
+			PV2=PV2-10
+			if(PV2<0)
+			{
+				PV2=0
 			}
 		}
 	}
 	else if(posSourisY>300)
 	{
 		window.onclick =() => {
-			PV=PV-10
+			PV1=PV1-10
+			if(PV1<0)
+			{
+				PV1=0
+			}
+			PV2=PV2+10
+			if(PV2>100)
+			{
+				PV2=100
+			}
 		}
 	}
 	else{
 		window.onclick =() =>{}
 	}
-	context.fillRect(300, 300, 300*PV/100, 40);
+	if(PV1>50)
+	{
+		context.fillStyle='green';
+		context.fillRect(635, 300, 140*PV1/100, 40)
+	}
+	else if ((PV1>25)&(PV1<=50))
+	{
+		context.fillStyle='yellow';
+		context.fillRect(635, 300, 140*PV1/100, 40)
+	}
+	else 
+	{
+		context.fillStyle='red';
+		context.fillRect(635, 300, 140*PV1/100, 40)
+	}
 	
+	if(PV2>50)
+	{
+		context.fillStyle='green';
+		context.fillRect(110, 80, 150*PV2/100, 40)
+	}
+	else if ((PV2>25)&(PV2<=50))
+	{
+		context.fillStyle='yellow';
+		context.fillRect(110, 80, 150*PV2/100, 40)
+	}
+	else 
+	{
+		context.fillStyle='red';
+		context.fillRect(110, 80, 150*PV2/100, 40)
+	}
+	context.drawImage(jaugeE,0, 40,300,100)
+	context.drawImage(jaugeJ,500, 270,300,100)
 }	
