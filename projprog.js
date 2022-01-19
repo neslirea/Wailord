@@ -95,36 +95,36 @@ menus = function(){
         {
 			//affichage du fond titlescreen avec les pika en transition
 			context.drawImage(titlescreen,0,0,canvas.width,canvas.height); 
-            context.drawImage(mob,0,0, 100, 100);
-            context.drawImage(mob,700,500, 100, 100);
+            context.drawImage(mob,0,0, (canvas.width)/10, (canvas.height)/8);
+            context.drawImage(mob,(canvas.width)*9/10,(canvas.height)*7/8, (canvas.width)/10, (canvas.height)/8);
             setTimeout(()=> transit=false, 2000) //timer de transition de 2000ms, échu alors fin de transition
         }
         else{
 			//affichage de texte et de ses paramètres
             context.font = "bold 50px courier";
             context.fillStyle='black';
-            context.fillText(('MENU'), 260, 80);
+            context.fillText(('MENU'), (canvas.width)*2/5, (canvas.height)/12,(canvas.width)/5);
 			//
 			
-			context.drawImage(chef,20,150,300,400); //affichage du chef dans le menu
+			context.drawImage(chef,(canvas.width)*5/30,(canvas.height)/4,(canvas.width)/3,(canvas.height)/2); //affichage du chef dans le menu
 			
 			//affichage de texte et de ses paramètres + gestion du déplacement à la souris sur le menu
             context.fillStyle='blue';
-            context.fillText('Campagne', 400, 180);
-            if((posSourisX>400)&(posSourisY>150)&(posSourisY<190)) //si la souris se trouve dans cette zone...
+            context.fillText('Campagne', (canvas.width)*4/7, (canvas.height)*4/12,(canvas.height)*2/5,(canvas.height)/12);
+            if((posSourisX>(canvas.width)*4/7)&(posSourisY>(canvas.height)*7/24)&(posSourisY<(canvas.height)*4/12)) //si la souris se trouve dans cette zone...
 			{
 				casep ="blue";
 				
 				//affichage d'un rectangle avec transparence 
-                let lineaire = context.createLinearGradient(350, 180, 380, 220);
+                let lineaire = context.createLinearGradient((canvas.width)*11/21, (canvas.height)*3/12, (canvas.width)*13/21, (canvas.height)*4/12);
                 lineaire.addColorStop(0,'#AAAADD');
                 lineaire.addColorStop(1, 'white');
                 context.fillStyle = lineaire;
-                context.fillRect(350, 150, 380, 40);
+                context.fillRect((canvas.width)*11/21, (canvas.height)*7/24,  (canvas.width)*13/21, (canvas.height)/24);
 				//
 				
                 context.fillStyle='blue';
-                context.fillText('Campagne', 400, 180);
+				context.fillText('Campagne', (canvas.width)*4/7, (canvas.height)*4/12,(canvas.height)*2/5,(canvas.height)/12);
 				if (prtaudio!=0) //si la souris arrive sur la zone depuis une autre zone alors...
 				{
 					prtaudio = 0;
@@ -146,17 +146,17 @@ menus = function(){
             //MEME QUE CAS BLEU
 			
             context.fillStyle='red';
-            context.fillText('Partie rapide', 400, 250);
-            if((posSourisX>400)&(posSourisY>220)&(posSourisY<260))
+            context.fillText('Partie rapide', (canvas.width)*4/7, (canvas.height)*5/12,(canvas.height)*3/5,(canvas.height)/12);
+            if((posSourisX>(canvas.width)*4/7)&(posSourisY>(canvas.height)*9/24)&(posSourisY<(canvas.height)*5/12))
 			{
 				casep ="red";
-                let lineaire = context.createLinearGradient(350, 250, 380, 290);
+                let lineaire = context.createLinearGradient((canvas.width)*11/21, (canvas.height)*4/12, (canvas.width)*13/21, (canvas.height)*5/12);
                 lineaire.addColorStop(0,'#DDAAAA');
                 lineaire.addColorStop(1, 'white');
                 context.fillStyle = lineaire;
-                context.fillRect(350, 220, 380, 40);
+                context.fillRect((canvas.width)*11/21, (canvas.height)*9/24, (canvas.width)*13/21, (canvas.height)/24);
                 context.fillStyle='red';
-                context.fillText('Partie rapide', 400, 250);
+				context.fillText('Partie rapide', (canvas.width)*4/7, (canvas.height)*5/12,(canvas.height)*3/5,(canvas.height)/12);
 				if (prtaudio!=1)
 				{
 					prtaudio = 1;
@@ -174,17 +174,17 @@ menus = function(){
 			//MEME QUE CAS BLEU
 			
             context.fillStyle='green';
-            context.fillText('Options', 400, 320);
-            if((posSourisX>400)&(posSourisY>285)&(posSourisY<325))
+            context.fillText('Options', (canvas.width)*4/7, (canvas.height)*6/12,(canvas.height)*2/5,(canvas.height)/12);
+            if((posSourisX>(canvas.width)*4/7)&(posSourisY>(canvas.height)*11/24)&(posSourisY<(canvas.height)*6/12))
 			{
 				casep ="green";
-                let lineaire = context.createLinearGradient(350, 320, 380, 360);
-                lineaire.addColorStop(0,'#AADDAA');
+                let lineaire = context.createLinearGradient((canvas.width)*11/21,  (canvas.height)*5/12, (canvas.width)*13/21,  (canvas.height)*6/12);
+                lineaire.addColorStop(0,'#9ACD9A');
                 lineaire.addColorStop(1, 'white');
                 context.fillStyle = lineaire;
-                context.fillRect(350, 290, 380, 40);
+                context.fillRect((canvas.width)*11/21, (canvas.height)*11/24, (canvas.width)*13/21, (canvas.height)/24);
                 context.fillStyle='green';
-                context.fillText('Options', 400, 320);
+				context.fillText('Options', (canvas.width)*4/7, (canvas.height)*6/12,(canvas.height)*2/5,(canvas.height)/12);
 				if (prtaudio!=2)
 				{
 					prtaudio = 2;
@@ -206,17 +206,17 @@ menus = function(){
 			
 			
             context.fillStyle='salmon';
-            context.fillText('Crédits', 400, 390);
-            if((posSourisX>400)&(posSourisY>360)&(posSourisY<400))
+            context.fillText('Crédits', (canvas.width)*4/7,  (canvas.height)*7/12,(canvas.height)*2/5,(canvas.height)/12);
+            if((posSourisX>(canvas.width)*4/7)&(posSourisY>(canvas.height)*13/24)&(posSourisY<(canvas.height)*7/12))
 			{
 				casep ="salmon";
-                let lineaire = context.createLinearGradient(350, 390, 380, 430);
-                lineaire.addColorStop(0,'#FFB5A7');
+                let lineaire = context.createLinearGradient((canvas.width)*11/21,  (canvas.height)*6/12, (canvas.width)*13/21,  (canvas.height)*7/12);
+                lineaire.addColorStop(0,'#DAB0A2');
                 lineaire.addColorStop(1, 'white');
                 context.fillStyle = lineaire;
-                context.fillRect(350, 360, 380, 40);
+                context.fillRect((canvas.width)*11/21, (canvas.height)*13/24, (canvas.width)*13/21, (canvas.height)/24);
                 context.fillStyle='salmon';
-                context.fillText('Crédits', 400, 390);
+				context.fillText('Crédits', (canvas.width)*4/7,  (canvas.height)*7/12,(canvas.height)*2/5,(canvas.height)/12);
 				if (prtaudio!=3)
 				{
 					prtaudio = 3;
@@ -244,11 +244,11 @@ menus = function(){
     else{
         context.clearRect(0, 0, canvas.width, canvas.height); //nettoyage du canvas
 		context.drawImage(titlescreen,0,0,canvas.width,canvas.height); //affichage de titlescreen
-		context.drawImage(title,150,0,500,150); //affichage de title
+		context.drawImage(title,(canvas.width)/3,0,(canvas.width)/3,(canvas.height)/4); //affichage de title
 		//affichage de texte avec tout les paramètres
 		context.fillStyle='yellow';
         context.font = "bold 50px courier";
-        context.fillText('Click to play', 180, 590);
+        context.fillText('Click to play', (canvas.width)/3, (canvas.height)*59/60,(canvas.width),(canvas.height)/60);
 		//
 		
 		gener.play(); //lancement musique gener
