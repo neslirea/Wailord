@@ -2,8 +2,8 @@
 //var context;
 const canvas = document.querySelector('canvas');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = 1150;
+canvas.height = 720;
 
 var terrain = new Image();
 	terrain.src = "int_pics/battleground.jpg";
@@ -13,6 +13,13 @@ var pk1 = new Image();
 
 var pk2 = new Image();
 	pk2.src = "int_pics/flareon.png";
+
+let jaugeJ = new Image();
+	jaugeJ.src = "jaugej.png"
+	
+let jaugeE = new Image();
+	jaugeE.src = "jaugee.png"
+	
 
 // sur l interface
 var backgroundInt = new Image();
@@ -42,38 +49,55 @@ function mouse_position(event) //permet de relever la position de la souris via 
 function addInterface() {					// espace de travail (100, 700, 1300, 300);
 
 	context = canvas.getContext("2d");
-	context.drawImage(backgroundInt,400,710, 600, 280);
+	context.drawImage(backgroundInt,300,540, 600, 170);
 
-	context.drawImage(btnAtk,500,715, 400, 160);
-	context.drawImage(btnBag,405,885, 190, 80);
-	context.drawImage(btnSwap,805,885, 190, 80);
-	context.drawImage(btnFlee,605,905, 190, 80);
+	context.drawImage(btnAtk,450,545, 300, 70);
+	context.drawImage(btnBag,305,630, 190, 70);
+	context.drawImage(btnSwap,705,630, 190, 70);
+	context.drawImage(btnFlee,505,630, 190, 70);
 
 	console.log(posSourisX,posSourisY);
-
-	if((posSourisX>499)&(posSourisX<901)&(posSourisY>714)&(posSourisY<876)) //si la souris se trouve dans la zone btn ATK
-			{
-				console.log(window);
-				window.onclick = () => {
-					clearInterval(INT_Interval_ID)
-					ATK_Interval_ID=setInterval(FonctionAttaque,10);
-				}
-			}
-	if((posSourisX>404)&(posSourisX<596)&(posSourisY>884)&(posSourisY<966))		//bag
+	
+	
+	let PV1=100;
+	let PV2=100;
+	
+	if(PV1>50)
 	{
-		window.onclick = () => {
-		}
+		context.fillStyle='green';
+		context.fillRect(635, 350, 140*PV1/100, 70)
 	}
-	if((posSourisX>804)&(posSourisX<996)&(posSourisY>884)&(posSourisY<966))		//swap
+	else if ((PV1>25)&(PV1<=50))
 	{
-		window.onclick = () => {
-		}
-	}	
-	if((posSourisX>604)&(posSourisX<796)&(posSourisY>904)&(posSourisY<986))		// flee
-	{
-		window.onclick = () => {
-		}
+		context.fillStyle='yellow';
+		context.fillRect(635, 350, 140*PV1/100, 70)
 	}
+	else 
+	{
+		context.fillStyle='red';
+		context.fillRect(635, 350, 140*PV1/100, 70)
+	}
+	
+	if(PV2>50)
+	{
+		context.fillStyle='green';
+		context.fillRect(360, 100, 150*PV2/100, 40)
+	}
+	else if ((PV2>25)&(PV2<=50))
+	{
+		context.fillStyle='yellow';
+		context.fillRect(360, 100, 150*PV2/100, 40)
+	}
+	else 
+	{
+		context.fillStyle='red';
+		context.fillRect(360, 100, 150*PV2/100, 40)
+	}
+	context.drawImage(jaugeE,250, 60,300,100)
+	context.drawImage(jaugeJ,500, 320,300,130)
+	
+	
+	
 	// écouteur sur les boutons
 	//btnAtk.onclick = FonctionAttaque();				// Déterminer quand est-ce que ça clique
 	//btnBag.onPress = NotDevelopedYet;
@@ -84,15 +108,15 @@ function addInterface() {					// espace de travail (100, 700, 1300, 300);
 
 function FonctionAttaque() {	
 
-	context.clearRect(400,710, 600, 280);	// on clear la zone d'interface			//le clear fonctionne, mais s'active tout seul
+	context.clearRect(300,560, 600, 130);	// on clear la zone d'interface			//le clear fonctionne, mais s'active tout seul
 
 	context = canvas.getContext("2d");
-	context.drawImage(backgroundInt,400,710, 600, 280);						// on re dessine illico la zone
+	context.drawImage(backgroundInt,300,560, 600, 130);						// on re dessine illico la zone
 
-	context.drawImage(btnAtk,410,720, 285, 125);
-	context.drawImage(btnAtk,705,720, 285, 125);
-	context.drawImage(btnAtk,410,855, 285, 125);
-	context.drawImage(btnAtk,705,855, 285, 125);
+	context.drawImage(btnAtk,410,560, 285, 125);
+	context.drawImage(btnAtk,705,560, 285, 125);
+	context.drawImage(btnAtk,410,600, 285, 125);
+	context.drawImage(btnAtk,705,600, 285, 125);
 	
 	// écouteur sur les boutons
 	//Atk1.onPress = FonctionAttaque1;
@@ -103,24 +127,16 @@ function FonctionAttaque() {
 
 window.onload = function()	{	// At start
 
-const white = canvas.getContext('2d');
-white.fillStyle= 'rgba(255,255,255)';
-white.fillRect(100, 0, 1150, 540);
+
  
-const background = canvas.getContext("2d");	
-background.drawImage(terrain,100,0, 1150, 540);
-
 context = canvas.getContext("2d");	
-context.drawImage(pk1,300,210, 300, 300);
-context.drawImage(pk2,780,140, 200, 200);
-
-const text_box = canvas.getContext('2d');
-text_box.fillStyle= 'rgba(0,0,0)';
-text_box.fillRect(100, 540, 1150, 140);
-
-const Interface_cbt = canvas.getContext('2d');	// l inteface qui accueille les boutons
-Interface_cbt.fillStyle= 'rgba(200,200,200)';
-Interface_cbt.fillRect(100, 680, 1150, 320);
+context.drawImage(terrain,0,0, 1150, 450);
+context.drawImage(pk1,200,210, 300, 300);
+context.drawImage(pk2,680,140, 200, 200);
+context.fillStyle= 'rgba(0,0,0)';
+context.fillRect(0, 450, 1150, 80);
+context.fillStyle= 'rgba(200,200,200)';
+context.fillRect(0, 530, 1150, 190);
 
 INT_Interval_ID=setInterval(addInterface,10);	// a developper....
 }
