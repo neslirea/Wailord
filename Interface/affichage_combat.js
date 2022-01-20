@@ -184,10 +184,13 @@ function AfficherCombat(){
 	AfficherStatut(current_pkm.pv, adversaire.pv);		
 	let image1 = new Image();
 	image1.src = "Sprites_Pokemon/"+current_pkm.sprite_dos;
-	context.drawImage(image1,200,210, 300, 300);
 	let image2 = new Image();
 	image2.src = "Sprites_Pokemon/"+adversaire.sprite;
-	context.drawImage(image2,680,140, 200, 200);
+	//redessine le pok toutes les secondes (cas où l'image est mal chargée)
+	combat_pok_interval_ID = setInterval(()=>{		
+		context.drawImage(image1,200,210, 300, 300);
+		context.drawImage(image2,680,140, 200, 200);
+	}, 1000);
 }
 
 

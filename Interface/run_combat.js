@@ -6,6 +6,7 @@ let adversaire = null;
 const combat_duree_affichage = 1000;
 let combat_main_interval_ID;
 let combat_fin_interval_ID;
+let combat_pok_interval_ID;
 
 let combat_user_Interval_ID;
 
@@ -53,6 +54,7 @@ Fin = function(){
     context.clearRect(0, 0, canvas.width, canvas.height);        
         context.font = "bold 50px courier";
         context.fillStyle='black';
+        clearInterval(combat_pok_interval_ID);
         if (current_pkm.pv>0){
             console.log("victoire");
             context.fillText("Vous avez gagné !", 300, 170);
