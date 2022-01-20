@@ -164,7 +164,7 @@ menus = function(){
             //MEME QUE CAS BLEU
 			
             context.fillStyle='red';
-            context.fillText('Partie rapide', (canvas.width)*4/7, (canvas.height)*5/12,(canvas.height)*3/5,(canvas.height)/12);
+            context.fillText('Etude des types', (canvas.width)*4/7, (canvas.height)*5/12,(canvas.height)*3/5,(canvas.height)/12);
             if((posSourisX>(canvas.width)*4/7)&(posSourisY>(canvas.height)*9/24)&(posSourisY<(canvas.height)*5/12))
 			{
 				casep ="red";
@@ -174,20 +174,15 @@ menus = function(){
                 context.fillStyle = lineaire;
                 context.fillRect((canvas.width)*11/21, (canvas.height)*9/24, (canvas.width)*13/21, (canvas.height)/24);
                 context.fillStyle='red';
-				context.fillText('Partie rapide', (canvas.width)*4/7, (canvas.height)*5/12,(canvas.height)*3/5,(canvas.height)/12);
+				context.fillText('Etude des types', (canvas.width)*4/7, (canvas.height)*5/12,(canvas.height)*3/5,(canvas.height)/12);
 				if (prtaudio!=1)
 				{
 					prtaudio = 1;
 					let audio = new Audio('selection.mp3')
 					audio.play()
 				}
-				window.onclick = () => {
-					context.clearRect(0, 0, canvas.width, canvas.height);
-					clearInterval(MENU_Interval_ID)
-					console.log(MENU_Interval_ID)
-					context.drawImage(titlescreen,0,0,canvas.width,canvas.height);
-					context.drawImage(mob,0,0, 100, 100);
-					context.drawImage(mob,700,500, 100, 100);
+				window.onclick = () => {					
+					window.open('https://neslirea.github.io/Wailord/types.html', '_blank');		
 				}
             }
 			

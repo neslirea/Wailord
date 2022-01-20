@@ -2,6 +2,10 @@
 let Button = document.getElementById("Valider");
 Button.addEventListener("click", TesterType); 
 
+let Button2 = document.getElementById("Fermer");
+Button2.addEventListener("click", window.close()); 
+
+
 
 /**
  * Fonction appelée dans la page de test des types 
