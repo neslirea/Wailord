@@ -130,6 +130,7 @@ Combat_Choix = function(){
     if ((selected!=-1)&(selected<=current_pkm.getAttaques().length-1)){
         // si on est passé sur un des rectangles d'attaques
         window.onclick = () => {
+            window.onclick = () => {}
             clearInterval(combat_user_Interval_ID);
             context.clearRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
             context.fillStyle = "grey";		
