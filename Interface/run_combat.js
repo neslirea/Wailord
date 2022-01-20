@@ -42,25 +42,29 @@ combats = function()
         context.fillStyle='black';
         context.fillText(current_pkm.nom +" contre "+ adversaire.nom, 100, 170);
         combat_init=true;
+        AfficherCombat();
     }
+    setTimeout(AfficherCombat, 100);
     setTimeout(Deb_Tour, 1000);
-    AfficherCombat();
 }	
 
 Deb_Tour = function(){
-	context.clearRect(0, 0, canvas.width, canvas.height);
-    context.fillStyle = "grey";		
+    AfficherStatut(current_pkm.pv, adversaire.pv);
+    context.fillStyle = "grey";	
 	context.fillRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
     //11111
     console.log("Deb_Tour");
     //On regarde si le combat est fini
     if(current_pkm.pv==0||adversaire.pv==0){
         //si oui, on affiche le résultat puis on passe à l'écran des crédits
+		context.clearRect(0, 0, canvas.width, canvas.height);        
+        context.font = "bold 50px courier";
+        context.fillStyle='black';
+        combat_init=false;
         if (current_pkm.pv>0){
-		    context.clearRect(0, 0, canvas.width, canvas.height);
+            console.log("victoire");
             context.fillText("Vous avez gagné !", 300, 170);
         } else {
-		    context.clearRect(0, 0, canvas.width, canvas.height);
             context.fillText("Vous avez perdu...", 300, 170);
         }
         //permet au bout de 1 secondes de pouvoir cliquer pour passer à l'autre écran
@@ -69,27 +73,32 @@ Deb_Tour = function(){
 	        context.drawImage(skip,canvas.width-50,canvas.height-50,50,50);
             //console.log("this is the first message");
             window.onclick = () => {
-		    Credits_Interval_ID=setInterval(credits,10);
-		    credits();		
+		        Credits_Interval_ID=setInterval(credits,10);
+		        credits();		
             }    
         }, 1000);
     } else {    //si non, on lance un tour
         //On commence par saisir le choix utilisateur, ce qui lancera ensuite le tour
-        combat_choix_fait = false;
         combat_user_Interval_ID = setInterval(Combat_Choix, 100);
     }
 }
 
 Combat_Choix = function(){
     //11111
-    AfficherCombat();
     console.log("Choix");
 	context.clearRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
     context.fillStyle = "grey";		 
 	context.fillRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
     window.onclick = () => {}
+    //Affiche le cadre et le texte
+    context.drawImage(cadre,combat_marge,canvas.height-combat_hauteur_menu+combat_marge, canvas.width*(1-combat_ratio_menu)-combat_marge*2, combat_hauteur_menu-2*combat_marge);
+    context.font = "bold 30px courier";
+    context.fillStyle='black';
+    context.fillText("Que doit faire "+current_pkm.nom+" ?", combat_marge+70, canvas.height-combat_hauteur_menu+combat_marge+70);
+
     //Affiche les possibilités
     AffichageChoixAttaque(current_pkm);
+    
     
     // zone de choix
     let y0 = canvas.height-combat_hauteur_menu+combat_marge
@@ -125,7 +134,6 @@ Combat_Choix = function(){
             context.clearRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
             context.fillStyle = "grey";		
 	        context.fillRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
-            combat_choix_fait=true;
             setTimeout(() => {
             //On génère des évènements si on a bien sélectionné l'attaque :
                 //on arrête le timer
@@ -230,21 +238,19 @@ Attaque = function(Attaquant, Defenseur, Attaque){
             let PVperdus =(Niv*0.4+2)*Attaquant.atk*Attaque.puissance
             PVperdus = PVperdus / (Defenseur.def*50) +2
             PVperdus *= CM;
-            console.log("puissance attaque "+Attaque.puissance);
-            console.log("def pkm "+Defenseur.def);
-            console.log("atk pkm "+Attaquant.atk);
-            console.log("pv perdus "+PVperdus);
-            console.log("cm "+CM);
 
+            //affichage des dégats
+            let PV_Init = Defenseur.pv;
+
+            
             Defenseur.pv = Math.floor(Defenseur.pv-PVperdus);
             
             if (Defenseur.pv<0){
                 Defenseur.pv=0;
             }
-            //affichage des dégats
 
             setTimeout(() => {
-                AfficherDegats(Defenseur==current_pkm, PVperdus);
+                AfficherDegats(Defenseur==current_pkm, PV_Init, PVperdus);
 
                 //console.log("this is the first message");
  
@@ -252,7 +258,7 @@ Attaque = function(Attaquant, Defenseur, Attaque){
         } else {
             //sinon, on affiche manqué
             setTimeout(() => {
-                AfficherManque()
+                AfficherManque();
             }, combat_duree_affichage*2);
         }
         

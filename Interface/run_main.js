@@ -286,7 +286,6 @@ menus = function(){
     }
     
 }
-console.log(MENU_Interval_ID)
 
 //crédits affiche un écran fixe (à agrémenter par la suite) qu'on peut quitter en cliquant
 

@@ -28,7 +28,7 @@ Pokemons = function(){
 	//nom, type, vitesse, precision, puissance//nom, type, vitesse, precision, puissance
    //nom, type, puissance, precision
        let atk1eau = new Capacite("Cascade", "Eau", 60, 100);
-    let atk2eau = new Capacite("Hydrocannon", "Eau", 110, 90);
+    let atk2eau = new Capacite("Hydrocannon", "Feu", 110, 90);
     let atk3eau = new Capacite("Surf", "Eau", 90, 95);
  
     let atk1pla = new Capacite("Balle-Graine", "Plante", 60, 100);

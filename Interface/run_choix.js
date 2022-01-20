@@ -50,13 +50,13 @@ choix = function(){
 		let pokemon = choix_pokemons[choix_current]
 		let image = new Image();
 		image.src = "Sprites_Pokemon/"+pokemon.sprite;
-		context.drawImage(image, 0.5*width-0.58*height/2+10, 0.30*height, 0.58*height, 0.58*height); //affichage du pokemon
+		context.drawImage(image, 0.5*width-0.58*height/2+10, 0.27*height, 0.58*height, 0.58*height); //affichage du pokemon
 		let type = new Image();
 		type.src = "Sprites_Menus/"+pokemon.type+".png";
-		context.drawImage(type,0.47*width, 0.30*height, 0.06*width, 0.06*width); //affichage du type du pokemon
+		context.drawImage(type,0.22*width, 0.23*height, 0.06*width, 0.06*width); //affichage du type du pokemon
 		context.font = "bold 40px courier";
         context.fillStyle='black';
-        context.fillText((pokemon.nom), 0.44*width, 0.28*height);
+        context.fillText((pokemon.nom), 0.30*width, 0.28*height);
 
 		//affichage de texte et de ses paramètres
         context.font = "bold 50px courier";
@@ -132,36 +132,40 @@ choix = function(){
 				context.fillRect(att_x0, att_y0, att_width, att_height);
 				context.font = "bold 18px courier";
 				context.fillStyle='black';
-				context.fillText((attaques[0].nom), att_x0+80, att_y0+60);
-				type.src = "Sprites_Menus/"+attaques[0].type+".png";
-				context.drawImage(type,att_x0+10, att_y0+20, 0.04*width, 0.04*width); //affichage du type du pokemon
+				context.fillText((attaques[0].nom), att_x0+80, att_y0+50);
+				let type1 = new Image();
+				type1.src = "Sprites_Menus/"+attaques[0].type+".png";
+				context.drawImage(type1,att_x0+10, att_y0+20, 0.04*width, 0.04*width); //affichage du type du pokemon
 			}
 			if (attaques.length>=2){				
 				context.fillStyle = "white";			
 				context.fillRect(att_x1, att_y0, att_width, att_height);
 				context.font = "bold 18px courier";
 				context.fillStyle='black';
-				context.fillText((attaques[1].nom), att_x1+80, att_y0+60);
-				type.src = "Sprites_Menus/"+attaques[1].type+".png";
-				context.drawImage(type,att_x1+10, att_y0+20, 0.04*width, 0.04*width); //affichage du type du pokemon
+				context.fillText((attaques[1].nom), att_x1+80, att_y0+50);
+				let type2 = new Image();
+				type2.src = "Sprites_Menus/"+attaques[1].type+".png";
+				context.drawImage(type2,att_x1+10, att_y0+20, 0.04*width, 0.04*width); //affichage du type du pokemon
 			}
 			if (attaques.length>=3){				
 				context.fillStyle = "white";			
 				context.fillRect(att_x0, att_y1, att_width, att_height);
 				context.font = "bold 18px courier";
 				context.fillStyle='black';
-				context.fillText((attaques[2].nom), att_x0+80, att_y1+60);
-				type.src = "Sprites_Menus/"+attaques[2].type+".png";
-				context.drawImage(type,att_x0+10, att_y1+20, 0.04*width, 0.04*width); //affichage du type du pokemon
+				context.fillText((attaques[2].nom), att_x0+80, att_y1+50);
+				let type3 = new Image();
+				type3.src = "Sprites_Menus/"+attaques[2].type+".png";
+				context.drawImage(type3,att_x0+10, att_y1+20, 0.04*width, 0.04*width); //affichage du type du pokemon
 			}
 			if (attaques.length>=4){				
 				context.fillStyle = "white";		
 				context.fillRect(att_x1, att_y1, att_width, att_height);
 				context.font = "bold 18px courier";
 				context.fillStyle='black';
-				context.fillText((attaques[3].nom), att_x1+80, att_y1+60);
-				type.src = "Sprites_Menus/"+attaques[3].type+".png";
-				context.drawImage(type,att_x1+10, att_y1+20, 0.04*width, 0.04*width); //affichage du type du pokemon
+				context.fillText((attaques[3].nom), att_x1+80, att_y1+50);
+				let type4 = new Image();
+				type4.src = "Sprites_Menus/"+attaques[3].type+".png";
+				context.drawImage(type4,att_x1+10, att_y1+20, 0.04*width, 0.04*width); //affichage du type du pokemon
 			}
 		}		
 		
