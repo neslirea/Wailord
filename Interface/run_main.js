@@ -287,11 +287,18 @@ menus = function(){
 credits = function()
 {
 	context.drawImage(crd,0,0,canvas.width,canvas.height);
+	/*
 	 context.drawImage(programmers,310,310,170,25);
 	 context.drawImage(clea,313,345,160,25);
 	 context.drawImage(mattew,313,380,160,25);
 	 context.drawImage(yann,313,415,160,25);
 	 context.drawImage(stephane,300,450,185,28);
+	 context.drawImage(skip,canvas.width-50,canvas.height-50,50,50);*/
+	 context.drawImage(programmers,490,340,170,25);
+	 context.drawImage(clea,493,385,160,25);
+	 context.drawImage(mattew,493,420,160,25);
+	 context.drawImage(yann,493,455,160,25);
+	 context.drawImage(stephane,480,490,185,28);
 	 context.drawImage(skip,canvas.width-50,canvas.height-50,50,50);
 	window.onclick =() => {
 		clearInterval(Credits_Interval_ID)

@@ -17,7 +17,7 @@ function AfficherAttaque(Attaquant, Attaque){
 }
 
 function AfficherEfficacite(Efficacite){
-    const p = document.getElementById("Affichage");
+    //const p = document.getElementById("Affichage");
 
     if (Efficacite<1){
 		AfficherTexte("Ce n'est pas très efficace...");
@@ -39,12 +39,12 @@ function AfficherDegats(isUser, PV_Init, PVperdus){
 	}else {
 		AfficherStatut(current_pkm.pv, PV_Init);
 	}
-	for (let i=0; i<combat_duree_affichage-1; i+=(1000/fps_voulus)){
+	for (let i=0; i<combat_duree_affichage-100; i+=(1000/fps_voulus)){
 		setTimeout(()=>{
 			if(isUser){
-				AfficherStatut(PV_Init-(PVperdus*i/combat_duree_affichage), adversaire.pv);
+				AfficherStatut(PV_Init-(PVperdus*i/(combat_duree_affichage-100)), adversaire.pv);
 			}else {
-				AfficherStatut(current_pkm.pv, PV_Init-(PVperdus*i/combat_duree_affichage));
+				AfficherStatut(current_pkm.pv, PV_Init-(PVperdus*i/(combat_duree_affichage-100)));
 			}
 		}, i);
 	}

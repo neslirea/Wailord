@@ -5,6 +5,7 @@ let adversaire = null;
 
 const combat_duree_affichage = 1000;
 let combat_main_interval_ID;
+let combat_fin_interval_ID;
 
 let combat_user_Interval_ID;
 
@@ -48,7 +49,22 @@ combats = function()
     setTimeout(Deb_Tour, 1000);
 }	
 
+Fin = function(){
+    context.clearRect(0, 0, canvas.width, canvas.height);        
+        context.font = "bold 50px courier";
+        context.fillStyle='black';
+        if (current_pkm.pv>0){
+            console.log("victoire");
+            context.fillText("Vous avez gagné !", 300, 170);
+        } else {
+            context.fillText("Vous avez perdu...", 300, 170);
+        }
+    context.drawImage(skip,canvas.width-50,canvas.height-50,50,50);
+}
+
 Deb_Tour = function(){
+	context.clearRect(0, 0, canvas.width, combat_hauteur_menu);
+    AfficherCombat();
     AfficherStatut(current_pkm.pv, adversaire.pv);
     context.fillStyle = "grey";	
 	context.fillRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
@@ -57,26 +73,17 @@ Deb_Tour = function(){
     //On regarde si le combat est fini
     if(current_pkm.pv==0||adversaire.pv==0){
         //si oui, on affiche le résultat puis on passe à l'écran des crédits
-		context.clearRect(0, 0, canvas.width, canvas.height);        
-        context.font = "bold 50px courier";
-        context.fillStyle='black';
         combat_init=false;
-        if (current_pkm.pv>0){
-            console.log("victoire");
-            context.fillText("Vous avez gagné !", 300, 170);
-        } else {
-            context.fillText("Vous avez perdu...", 300, 170);
-        }
-        //permet au bout de 1 secondes de pouvoir cliquer pour passer à l'autre écran
-        setTimeout(() => {            
-            choix_pokemons = null;
-	        context.drawImage(skip,canvas.width-50,canvas.height-50,50,50);
-            //console.log("this is the first message");
-            window.onclick = () => {
-		        Credits_Interval_ID=setInterval(credits,10);
-		        credits();		
-            }    
-        }, 1000);
+        combat_fin_interval_ID=setInterval(Fin,100);
+        //permet de pouvoir cliquer pour passer à l'autre écran         
+        choix_pokemons = null;
+	    context.drawImage(skip,canvas.width-50,canvas.height-50,50,50);
+        //console.log("this is the first message");
+        window.onclick = () => {
+            clearInterval(combat_fin_interval_ID);
+		    Credits_Interval_ID=setInterval(credits,10);
+		    redits();		
+        }    
     } else {    //si non, on lance un tour
         //On commence par saisir le choix utilisateur, ce qui lancera ensuite le tour
         combat_user_Interval_ID = setInterval(Combat_Choix, 100);
