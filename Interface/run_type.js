@@ -3,7 +3,7 @@ let Button = document.getElementById("Valider");
 Button.addEventListener("click", TesterType); 
 
 let Button2 = document.getElementById("Fermer");
-Button2.addEventListener("click", window.close()); 
+Button2.addEventListener("click", Fermer); 
 
 
 
@@ -19,4 +19,8 @@ Button2.addEventListener("click", window.close());
     p.innerText = Type1 + ' sur ' + Type2 + ' = x'+types.effets(Type1, Type2);
 
     types.get_types();
+}
+
+function Fermer(){
+    window.close();
 }

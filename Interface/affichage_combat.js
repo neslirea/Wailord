@@ -12,21 +12,15 @@ let cadre = new Image(); //image pikachu de l'écran de transition
 
 function AfficherAttaque(Attaquant, Attaque){
     AfficherTexte(Attaquant.nom + " utilise " + Attaque.nom +" !");
-    //const p = document.getElementById("Affichage");
-        //p.innerText += Attaquant.nom + " utilise " + Attaque.nom +"!\n";
 }
 
 function AfficherEfficacite(Efficacite){
-    //const p = document.getElementById("Affichage");
-
-    if (Efficacite<1){
+	if (Efficacite==0){
+		AfficherTexte("La cible n'est pas affectée...'");
+	} else if (Efficacite<1){
 		AfficherTexte("Ce n'est pas très efficace...");
-        //p.innerText += "Ce n'est pas très efficace...\n";
-    } else if (Efficacite==1){
-
-    } else {
+    } else if (Efficacite>1){
 		AfficherTexte("C'est super efficace !");
-        //p.innerText += "C'est super efficace ! \n";
     }
 }
 
@@ -89,33 +83,58 @@ function AffichageChoixAttaque(pokemon){
 	context.fillRect(x0+marge, y0+height+2*marge, width, height);
 	context.fillRect(x0+width+2*marge, y0+height+2*marge, width, height);
 	//affichage de l'attaque 1
-	if (attaques.length>=1){				
+	if (attaques.length>=1){			
 				context.fillStyle = "white";				
-				context.fillRect(x0+marge, y0+marge, width, height);
+				context.fillRect(x0+marge, y0+marge, width, height);				
+				context.globalAlpha = 0.4;
+				let type1 = new Image();
+				type1.src = "Sprites_Menus/"+attaques[0].type+".png";	
+				context.drawImage(type1,x0+marge+width-height, y0+marge, height, height); //affichage du type du pokemon
+				context.globalAlpha = 1;
 				context.font = "bold 18px courier";
 				context.fillStyle='black';
-				context.fillText((attaques[0].nom), x0+marge, y0+marge+height/2);
+				context.fillText((attaques[0].nom), x0+2*marge, y0+1.5*marge+height/2);
+
 	}
 	if (attaques.length>=2){				
 				context.fillStyle = "white";				
 				context.fillRect(x0+width+2*marge, y0+marge, width, height);
+				context.globalAlpha = 0.4;
+				let type2 = new Image();
+				type2.src = "Sprites_Menus/"+attaques[1].type+".png";	
+				context.drawImage(type2,x0+width+2*marge+width-height, y0+marge, height, height); //affichage du type du pokemon
+				context.globalAlpha = 1;
 				context.font = "bold 18px courier";
 				context.fillStyle='black';
-				context.fillText((attaques[1].nom), x0+width+2*marge, y0+marge+height/2);
+				context.fillText((attaques[1].nom), x0+width+3*marge, y0+1.5*marge+height/2);
 	}
 	if (attaques.length>=3){				
 				context.fillStyle = "white";				
 				context.fillRect(x0+marge, y0+height+2*marge, width, height);
+
+				context.globalAlpha = 0.4;
+				let type3 = new Image();
+				type3.src = "Sprites_Menus/"+attaques[2].type+".png";	
+				context.drawImage(type3,x0+marge+width-height, y0+height+2*marge, height, height); //affichage du type du pokemon
+				context.globalAlpha = 1;
+
 				context.font = "bold 18px courier";
 				context.fillStyle='black';
-				context.fillText((attaques[2].nom), x0+marge, y0+height+2*marge+height/2);
+				context.fillText((attaques[2].nom), x0+2*marge, y0+height+2*marge+height/2);
 	}
 	if (attaques.length>=4){				
 				context.fillStyle = "white";				
 				context.fillRect(x0+width+2*marge, y0+height+2*marge, width, height);
+
+				context.globalAlpha = 0.4;
+				let type4 = new Image();
+				type4.src = "Sprites_Menus/"+attaques[3].type+".png";	
+				context.drawImage(type4,x0+width+2*marge+width-height, y0+height+2*marge, height, height); //affichage du type du pokemon
+				context.globalAlpha = 1;
+
 				context.font = "bold 18px courier";
 				context.fillStyle='black';
-				context.fillText((attaques[3].nom), x0+width+2*marge, y0+height+2*marge+height/2);
+				context.fillText((attaques[3].nom), x0+width+3*marge, y0+height+2*marge+height/2);
 	}
 }		
 
@@ -175,22 +194,18 @@ function AfficherStatut(PV1, PV2){
     context.fillText(current_pkm.nom, 500+54, 320+48);
 }
 
-//permet d'afficher l'interface : fond, pokemons, status, cadre gris
+//permet d'afficher l'interface du haut de l'écran : fond, pokemons, status
 function AfficherCombat(){
-	context.clearRect(0, 0, canvas.width, canvas.height-combat_hauteur_menu);
 	context.drawImage(terrain,0,0, canvas.width, canvas.height-combat_hauteur_menu);    
-	context.fillStyle = "grey";		
-	context.fillRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
 	AfficherStatut(current_pkm.pv, adversaire.pv);		
-	let image1 = new Image();
+    //redessine le pok toutes les secondes (cas où l'image est mal chargée)
+    let image1 = new Image();
 	image1.src = "Sprites_Pokemon/"+current_pkm.sprite_dos;
 	let image2 = new Image();
 	image2.src = "Sprites_Pokemon/"+adversaire.sprite;
-	//redessine le pok toutes les secondes (cas où l'image est mal chargée)
-	combat_pok_interval_ID = setInterval(()=>{		
 		context.drawImage(image1,200,210, 300, 300);
 		context.drawImage(image2,680,140, 200, 200);
-	}, 1000);
+
 }
 
 

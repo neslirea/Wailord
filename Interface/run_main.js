@@ -104,7 +104,6 @@ let casep;
 //
 
 menus = function(){
-    //console.log(MENU_Interval_ID)	
     window.onclick = () => Gamerunning = true
     
     if (Gamerunning)
@@ -154,7 +153,6 @@ menus = function(){
 				window.onclick = () => {
 					gener.pause();
 					context.clearRect(0, 0, canvas.width, canvas.height);
-					//console.log(MENU_Interval_ID)
 					clearInterval(MENU_Interval_ID)
 					CHOIX_Interval_ID=setInterval(choix,10);
 					choix();
@@ -256,9 +254,6 @@ menus = function(){
 			}
 			casep="vide";
 
-			/* AFFICHAGE DE LA POS SOURIS (debug)
-			console.log(posSourisX)
-			console.log(posSourisY)*/
         }
         
     } else{
@@ -282,13 +277,7 @@ menus = function(){
 credits = function()
 {
 	context.drawImage(crd,0,0,canvas.width,canvas.height);
-	/*
-	 context.drawImage(programmers,310,310,170,25);
-	 context.drawImage(clea,313,345,160,25);
-	 context.drawImage(mattew,313,380,160,25);
-	 context.drawImage(yann,313,415,160,25);
-	 context.drawImage(stephane,300,450,185,28);
-	 context.drawImage(skip,canvas.width-50,canvas.height-50,50,50);*/
+
 	 context.drawImage(programmers,490,340,170,25);
 	 context.drawImage(clea,493,385,160,25);
 	 context.drawImage(mattew,493,420,160,25);

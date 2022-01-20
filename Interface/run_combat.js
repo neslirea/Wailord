@@ -6,7 +6,6 @@ let adversaire = null;
 const combat_duree_affichage = 1000;
 let combat_main_interval_ID;
 let combat_fin_interval_ID;
-let combat_pok_interval_ID;
 
 let combat_user_Interval_ID;
 
@@ -48,13 +47,13 @@ combats = function()
     }
     setTimeout(AfficherCombat, 100);
     setTimeout(Deb_Tour, 1000);
+
 }	
 
 Fin = function(){
     context.clearRect(0, 0, canvas.width, canvas.height);        
         context.font = "bold 50px courier";
         context.fillStyle='black';
-        clearInterval(combat_pok_interval_ID);
         if (current_pkm.pv>0){
             console.log("victoire");
             context.fillText("Vous avez gagné !", 300, 170);
@@ -80,11 +79,10 @@ Deb_Tour = function(){
         //permet de pouvoir cliquer pour passer à l'autre écran         
         choix_pokemons = null;
 	    context.drawImage(skip,canvas.width-50,canvas.height-50,50,50);
-        //console.log("this is the first message");
         window.onclick = () => {
             clearInterval(combat_fin_interval_ID);
-		    Credits_Interval_ID=setInterval(credits,10);
-		    redits();		
+		    Credits_Interval_ID=setInterval(credits,100);
+		    credits();		
         }    
     } else {    //si non, on lance un tour
         //On commence par saisir le choix utilisateur, ce qui lancera ensuite le tour
@@ -95,6 +93,7 @@ Deb_Tour = function(){
 Combat_Choix = function(){
     //11111
     console.log("Choix");
+    AfficherCombat();
 	context.clearRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
     context.fillStyle = "grey";		 
 	context.fillRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
@@ -207,7 +206,6 @@ Tour = function(att1, att2)
             //Sinon, on effectue la deuxième attaque
             if (pokemon1.pv>0){
                 setTimeout(() => {
-                    //context.clearRect(0, 0, canvas.width, canvas.height);
                     Attaque(pokemon1, pokemon2, att1);
                 }, combat_duree_affichage*3);      
             }
@@ -260,10 +258,7 @@ Attaque = function(Attaquant, Defenseur, Attaque){
             }
 
             setTimeout(() => {
-                AfficherDegats(Defenseur==current_pkm, PV_Init, PVperdus);
-
-                //console.log("this is the first message");
- 
+                AfficherDegats(Defenseur==current_pkm, PV_Init, PVperdus); 
             }, combat_duree_affichage*2);
         } else {
             //sinon, on affiche manqué

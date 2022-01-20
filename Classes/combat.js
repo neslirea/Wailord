@@ -14,9 +14,6 @@ class Combat{
             let att2 = this.ChoixIA();
 
             this.Tour(att1, att2);
-            const p = document.getElementById("Affichage");
-            p.innerText += "\n" + this.pokemon1.nom +" : "+ this.pokemon1.pv +" PV \n";
-            p.innerText += "" + this.pokemon2.nom +" : "+ this.pokemon2.pv +" PV \n\n";
         }
         // Appel de la fonction fin
         this.Fin();
