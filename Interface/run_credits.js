@@ -15,7 +15,7 @@ credits = function()
 		creditsound.pause();
 		creditsound.currentTime=0;
 		gener.currentTime=0;
-		if(sound_ON){
+		if(is_Sound){
 			gener.play();
 		}
 	}
