@@ -1,33 +1,32 @@
 	
 Pokemons = function(){
 	//nom, type, pv, atk, def, vitesse)
-	let poke1 = new Pokemon("Milobellus", "milobellus.png", "milobellus_dos.png", "Eau", 295, 80, 100, 81);               //eau
-	let poke2 = new Pokemon("Jungko", "jungko.png", "jungko_dos.png", "Plante", 270, 95, 75, 120);                        //plante
-	let poke3 = new Pokemon("Typhlosion", "typhlosion.png", "typhlosion_dos.png", "Feu", 278, 95, 82, 100);               //feu
+	let poke1 = new Pokemon("Milobellus", "milobellus.png", "milobellus_dos.png", "Eau", 295, 80, 100, 81);           //eau
+    let poke2 = new Pokemon("Jungko", "jungko.png", "jungko_dos.png", "Plante", 270, 95, 75, 120);                        //plante
+    let poke3 = new Pokemon("Typhlosion", "typhlosion.png", "typhlosion_dos.png", "Feu", 278, 95, 82, 100);               //feu
 
-    let poke4 = new Pokemon("Cizayox", "cizayox.png", "cizayox_dos.png", "Insecte", 275, 115, 95, 70);                    //Insecte
-    let poke5 = new Pokemon("Zororark", "zoroark.png", "zoroark_dos.png", "Tenebres", 260, 110, 60, 105);                  //Tenebres
-    let poke6 = new Pokemon("Carchacrok", "carchacrok.png", "carchacrok_dos.png", "Dragon", 308, 115, 90, 102);            //Dragon
+    let poke4 = new Pokemon("Cizayox", "cizayox.png", "cizayox_dos.png", "Insecte", 275, 110, 95, 70);                    //Insecte
+    let poke5 = new Pokemon("Zororark", "zoroark.png", "zoroark_dos.png", "Tenebres", 260, 110, 60, 105);                 //Tenebres
+    let poke6 = new Pokemon("Carchacrok", "carchacrok.png", "carchacrok_dos.png", "Dragon", 308, 110, 80, 99);            //Dragon
 
     let poke7 = new Pokemon("Ohmassacre", "ohmassacre.png", "ohmassacre_dos.png", "Electrik", 285, 110, 80, 50);          //Electric
-    let poke8 = new Pokemon("Gardevoir", "gardevoir.png", "gardevoir_dos.png", "Fee", 268, 90, 80, 80);                  //Fee
+    let poke8 = new Pokemon("Gardevoir", "gardevoir.png", "gardevoir_dos.png", "Fee", 268, 90, 80, 80);                   //Fee
     let poke9 = new Pokemon("Lucario", "lucario.png", "lucario_dos.png", "Combat", 270, 115, 70, 90);                     //combat
 
     let poke10 = new Pokemon("Etouraptor", "etouraptor.png", "etouraptor_dos.png", "Vol", 285, 90, 65, 100);              //vol
     let poke11 = new Pokemon("Magireve", "magireve.png", "magireve_dos.png", "Spectre", 260, 85, 80, 100);                //Spectre
-    let poke12 = new Pokemon("Rhinastoc", "rhinastoc.png", "rhinastoc_dos.png", "Sol", 315, 110, 105, 40);                 //Sol
+    let poke12 = new Pokemon("Rhinastoc", "rhinastoc.png", "rhinastoc_dos.png", "Sol", 315, 110, 105, 40);                //Sol
 
-    let poke13 = new Pokemon("Lokhlass", "lapras.png", "lapras_dos.png", "Glace", 330, 85, 90, 60);                      //Glace
-    let poke14 = new Pokemon("Ronflex", "ronflex.png", "ronflex_dos.png", "Normal", 360, 85, 85, 30);                    //Normal
-    let poke15 = new Pokemon("Nidoking", "nidoking.png", "nidoking_dos.png", "Poison", 281, 95, 77, 85);                 //Poison
+    let poke13 = new Pokemon("Lokhlass", "lapras.png", "lapras_dos.png", "Glace", 330, 85, 90, 60);                       //Glace
+    let poke14 = new Pokemon("Ronflex", "ronflex.png", "ronflex_dos.png", "Normal", 360, 85, 85, 30);                     //Normal
+    let poke15 = new Pokemon("Nidoking", "nidoking.png", "nidoking_dos.png", "Poison", 281, 95, 77, 85);                  //Poison
 
-    let poke16 = new Pokemon("Mentali", "mentali.png", "mentali_dos.png", "Psy", 265, 100, 80, 110);                       //Psy
+    let poke16 = new Pokemon("Mentali", "mentali.png", "mentali_dos.png", "Psy", 265, 100, 80, 110);                      //Psy
     let poke17 = new Pokemon("Gigalithe", "gigalithe.png", "gigalithe_dos.png", "Roche", 285, 95, 110, 25);               //Roche
-    let poke18 = new Pokemon("Metaloss", "metaloss.png", "metaloss_dos.png", "Acier", 280, 115, 110, 70);                  //Acier
+    let poke18 = new Pokemon("Metaloss", "metaloss.png", "metaloss_dos.png", "Acier", 280, 115, 110, 70);                 //Acier
 
-	//nom, type, vitesse, precision, puissance//nom, type, vitesse, precision, puissance
-   //nom, type, puissance, precision
-       let atk1eau = new Capacite("Cascade", "Eau", 60, 100);
+    //nom, type, puissance, precision
+    	let atk1eau = new Capacite("Cascade", "Eau", 60, 100);
     let atk2eau = new Capacite("Hydrocannon", "Eau", 110, 90);
     let atk3eau = new Capacite("Surf", "Eau", 90, 95);
  
@@ -99,17 +98,18 @@ Pokemons = function(){
     let atk2aci = new Capacite("Choc Meteore", "Acier", 110, 90);
     let atk3aci = new Capacite("Tete de Fer", "Acier", 90, 95);
 
+    // Attribution des attaques aux pokémons
 	poke1.ajouterAttaque(atk1eau);
     poke1.ajouterAttaque(atk2eau);
     poke1.ajouterAttaque(atk3eau);
     poke1.ajouterAttaque(atk3gla);
 
-	poke2.ajouterAttaque(atk1pla);
+    poke2.ajouterAttaque(atk1pla);
     poke2.ajouterAttaque(atk2pla);
     poke2.ajouterAttaque(atk3pla);
     poke2.ajouterAttaque(atk3ins);
 
-	poke3.ajouterAttaque(atk1feu);
+    poke3.ajouterAttaque(atk1feu);
     poke3.ajouterAttaque(atk2feu);
     poke3.ajouterAttaque(atk3feu);
     poke3.ajouterAttaque(atk1com);
