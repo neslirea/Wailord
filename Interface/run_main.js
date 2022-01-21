@@ -9,26 +9,30 @@ let Gamerunning = false; //drapeau pour l'écran titre
 let mob = new Image(); //image pikachu de l'écran de transition
 	mob.src = "Sprites_Menus/pika.png";
 
-	
+
 let titlescreen = new Image(); //image pour l'écran titre
 	titlescreen.src = "Sprites_Menus/affpoke.png"
-	
+
 let title = new Image(); //image pour le titre de l'écran titre
 	title.src = "Sprites_Menus/PokemonTitle.png";
-	
+
 let chef = new Image(); //image pour le menu
 	chef.src = "Sprites_Menus/red.png";
-	
+
 // Mouse positions
 let posSourisX = 0;
 let posSourisY = 0;
 //
 //fond musical menus et crédits
-let gener = new Audio('Musiques/fondmelee.mp4')
+let gener = new Audio('Musiques/MainTheme.mp3');
 gener.loop=true;
 gener.volume=0.5;
-let creditsound = new Audio('Musiques/credits.mp3');
-
+let creditsound = new Audio('Musiques/PokemonLeagueTheme.mp3');
+creditsound.loop=true;
+creditsound.volume=0.5;
+let options = new Audio('Musiques/Options.mp3');
+options.loop=true;
+options.volume=0.5;
 
 // CREDITS
 let crd = new Image();
@@ -42,7 +46,7 @@ let clea = new Image();
 
 let mattew = new Image();
  mattew.src = "Sprites_Menus/MattewMartin.png";
- 
+
  let yann = new Image();
  yann.src = "Sprites_Menus/YannJobard.png";
 
@@ -65,7 +69,7 @@ window.onload = function()		// At start
 {
 let backgroundCanvas;
 let monPara = window.document.getElementById("para_1"); //inutile aussi dans un premier temps
-    
+
     //init background for collision test
     backgroundCanvas = document.createElement( "canvas" );
     // Adjust backgroundCanvas size at window's size
@@ -73,20 +77,20 @@ let monPara = window.document.getElementById("para_1"); //inutile aussi dans un 
     //backgroundCanvas.height = window.innerHeight;
     // Init backgroundContext for collision test
     backgroundContext = backgroundCanvas.getContext("2d");
-    
+
     //init our canvas and graphic context
     canvas = document.getElementById("myCanvas");
-    
+
     // Adjust backgroundCanvas size at window's size
     //canvas.width = window.innerWidth;
     //canvas.height = window.innerHeight;
-	
+
     // Init context to draw the game
     context = canvas.getContext("2d");
-	
+
     MENU_Interval_ID=setInterval(menus,10); //répétitions toutes les 10ms de la fonction menus
-    
-    
+
+
 }
 
 function mouse_position(event) //permet de relever la position de la souris via une balise onmousemove dans l'html
@@ -105,13 +109,13 @@ let casep;
 
 menus = function(){
     window.onclick = () => Gamerunning = true
-    
+
     if (Gamerunning)
     {
         context.clearRect(0, 0, canvas.width, canvas.height); //nettoyage du canvas
         if(transit){
 			//affichage du fond titlescreen avec les pika en transition
-			context.drawImage(titlescreen,0,0,canvas.width,canvas.height); 
+			context.drawImage(titlescreen,0,0,canvas.width,canvas.height);
             context.drawImage(mob,0,0, (canvas.width)/10, (canvas.height)/8);
             context.drawImage(mob,(canvas.width)*9/10,(canvas.height)*7/8, (canvas.width)/10, (canvas.height)/8);
             setTimeout(()=> transit=false, 2000) //timer de transition de 2000ms, échu alors fin de transition
@@ -122,24 +126,24 @@ menus = function(){
             context.fillStyle='black';
             context.fillText(('MENU'), (canvas.width)*2/5, (canvas.height)/12,(canvas.width)/5);
 			//
-			
+
 			context.drawImage(chef,(canvas.width)*5/30,(canvas.height)/4,(canvas.width)/3,(canvas.height)/2); //affichage du chef dans le menu
-			
+
 			//affichage de texte et de ses paramètres + gestion du déplacement à la souris sur le menu
             context.fillStyle='blue';
             context.fillText('Campagne', (canvas.width)*4/7, (canvas.height)*4/12,(canvas.height)*2/5,(canvas.height)/12);
             if((posSourisX>(canvas.width)*4/7)&(posSourisY>(canvas.height)*7/24)&(posSourisY<(canvas.height)*4/12)) //si la souris se trouve dans cette zone...
 			{
 				casep ="blue";
-				
-				//affichage d'un rectangle avec transparence 
+
+				//affichage d'un rectangle avec transparence
                 let lineaire = context.createLinearGradient((canvas.width)*11/21, (canvas.height)*3/12, (canvas.width)*13/21, (canvas.height)*4/12);
                 lineaire.addColorStop(0,'#AAAADD');
                 lineaire.addColorStop(1, 'white');
                 context.fillStyle = lineaire;
                 context.fillRect((canvas.width)*11/21, (canvas.height)*7/24,  (canvas.width)*13/21, (canvas.height)/24);
 				//
-				
+
                 context.fillStyle='blue';
 				context.fillText('Campagne', (canvas.width)*4/7, (canvas.height)*4/12,(canvas.height)*2/5,(canvas.height)/12);
 				if (prtaudio!=0) //si la souris arrive sur la zone depuis une autre zone alors...
@@ -148,8 +152,8 @@ menus = function(){
 					let audio = new Audio('selection.mp3')
 					audio.play()
 				}
-				
-				//SUR CLICK, TRANSITION VERS UN ECRAN FIXE, SUITE A DETERMINER				
+
+				//SUR CLICK, TRANSITION VERS UN ECRAN FIXE, SUITE A DETERMINER
 				window.onclick = () => {
 					gener.pause();
 					context.clearRect(0, 0, canvas.width, canvas.height);
@@ -160,7 +164,7 @@ menus = function(){
             }
 
             //MEME QUE CAS BLEU
-			
+
             context.fillStyle='red';
             context.fillText('Etude des types', (canvas.width)*4/7, (canvas.height)*5/12,(canvas.height)*3/5,(canvas.height)/12);
             if((posSourisX>(canvas.width)*4/7)&(posSourisY>(canvas.height)*9/24)&(posSourisY<(canvas.height)*5/12))
@@ -179,13 +183,13 @@ menus = function(){
 					let audio = new Audio('selection.mp3')
 					audio.play()
 				}
-				window.onclick = () => {					
-					window.open('https://neslirea.github.io/Wailord/types.html', '_blank');		
+				window.onclick = () => {
+					window.open('https://neslirea.github.io/Wailord/types.html', '_blank');
 				}
             }
-			
+
 			//MEME QUE CAS BLEU
-			
+
             context.fillStyle='green';
             context.fillText('Options', (canvas.width)*4/7, (canvas.height)*6/12,(canvas.height)*2/5,(canvas.height)/12);
             if((posSourisX>(canvas.width)*4/7)&(posSourisY>(canvas.height)*11/24)&(posSourisY<(canvas.height)*6/12))
@@ -205,19 +209,21 @@ menus = function(){
 					audio.play()
 				}
 				window.onclick = () => {
+					gener.pause();
+					options.play();
 					context.clearRect(0, 0, canvas.width, canvas.height);
 					clearInterval(MENU_Interval_ID)
 					console.log(MENU_Interval_ID)
 					context.drawImage(titlescreen,0,0,canvas.width,canvas.height);
 					context.drawImage(mob,0,0, 100, 100);
 					context.drawImage(mob,700,500, 100, 100);
-					
+
 				}
             }
-			
-			
-			// subtilité pour les crédits 
-			
+
+
+			// subtilité pour les crédits
+
             context.fillStyle='salmon';
             context.fillText('Crédits', (canvas.width)*4/7,  (canvas.height)*7/12,(canvas.height)*2/5,(canvas.height)/12);
             if((posSourisX>(canvas.width)*4/7)&(posSourisY>(canvas.height)*13/24)&(posSourisY<(canvas.height)*7/12))
@@ -233,14 +239,15 @@ menus = function(){
 				if (prtaudio!=3)
 				{
 					prtaudio = 3;
-					let audio = new Audio('selection.mp3')
-					audio.play()
+					let audio = new Audio('selection.mp3');
+					audio.play();
 				}
-				
+
 				//SUR SELECTION DE CREDITS, FIN DE REPETITION DE LA FONCTION MENUS ET DEBUT DE LA FONCTION CREDITS (voir clearInterval et setInterval ci-dessous)
-				
+
 				window.onclick = () => {
 					gener.pause();
+					creditsound.play()
 					context.clearRect(0, 0, canvas.width, canvas.height);
 					console.log(MENU_Interval_ID)
 					clearInterval(MENU_Interval_ID)
@@ -255,7 +262,7 @@ menus = function(){
 			casep="vide";
 
         }
-        
+
     } else{
         context.clearRect(0, 0, canvas.width, canvas.height); //nettoyage du canvas
 		context.drawImage(titlescreen,0,0,canvas.width,canvas.height); //affichage de titlescreen
@@ -265,17 +272,18 @@ menus = function(){
         context.font = "bold 50px courier";
         context.fillText('Click to play', 180, 590);
 		//
-		
+
 		gener.play(); //lancement musique gener
-		
+
     }
-    
+
 }
 
 //crédits affiche un écran fixe (à agrémenter par la suite) qu'on peut quitter en cliquant
 
 credits = function()
 {
+	creditsound.play();
 	context.drawImage(crd,0,0,canvas.width,canvas.height);
 
 	 context.drawImage(programmers,490,340,170,25);
@@ -288,7 +296,8 @@ credits = function()
 		clearInterval(Credits_Interval_ID)
 		MENU_Interval_ID=setInterval(menus,10);
 		creditsound.pause();
-		creditsound.currentTime = 0;
+		creditsound.currentTime=0;
+		gener.currentTime=0;
 		gener.play();
 	}
-}	
+}
