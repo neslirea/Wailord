@@ -132,7 +132,7 @@ menus = function(){
 
 			//affichage de texte et de ses paramètres + gestion du déplacement à la souris sur le menu
             context.fillStyle='blue';
-            context.fillText('Campagne', (canvas.width)*4/7, (canvas.height)*4/12,(canvas.height)*2/5,(canvas.height)/12);
+            context.fillText('Combat', (canvas.width)*4/7, (canvas.height)*4/12,(canvas.height)*2/5,(canvas.height)/12);
             if((posSourisX>(canvas.width)*4/7)&(posSourisY>(canvas.height)*7/24)&(posSourisY<(canvas.height)*4/12)) //si la souris se trouve dans cette zone...
 			{
 				casep ="blue";
@@ -146,7 +146,7 @@ menus = function(){
 				//
 
                 context.fillStyle='blue';
-				context.fillText('Campagne', (canvas.width)*4/7, (canvas.height)*4/12,(canvas.height)*2/5,(canvas.height)/12);
+				context.fillText('Combat', (canvas.width)*4/7, (canvas.height)*4/12,(canvas.height)*2/5,(canvas.height)/12);
 
 				//SUR CLICK, TRANSITION 
 				window.onclick = () => {
@@ -190,10 +190,7 @@ menus = function(){
                 context.fillStyle='green';
 				context.fillText('Options', (canvas.width)*4/7, (canvas.height)*6/12,(canvas.height)*2/5,(canvas.height)/12);
 				window.onclick = () => {
-					if (is_Sound){
-						gener.pause();
-						options_sound.play();	
-					}
+					gener.pause()
 					clearInterval(MENU_Interval_ID);
 					OPTIONS_Interval_ID=setInterval(options,100);
 					//options();
@@ -237,11 +234,11 @@ menus = function(){
     } else{
         context.clearRect(0, 0, canvas.width, canvas.height); //nettoyage du canvas
 		context.drawImage(titlescreen,0,0,canvas.width,canvas.height); //affichage de titlescreen
-		context.drawImage(title,150,0,500,150); //affichage de title
+		context.drawImage(title,(canvas.width)/3,0,(canvas.width)/3,(canvas.height)/4); //affichage de title
 		//affichage de texte avec tout les paramètres
 		context.fillStyle='yellow';
         context.font = "bold 50px courier";
-        context.fillText('Click to play', 180, 590);
+        context.fillText('Click to play', (canvas.width)/3, (canvas.height)*59/60,(canvas.width),(canvas.height)/60);
 		//
 		if(is_Sound){
 			gener.play(); //lancement musique gener
