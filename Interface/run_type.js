@@ -58,6 +58,13 @@ window.onload = function()		// At start
     }
     div.appendChild(tab);
 
+
+    tag = document.createElement("p");
+    text = document.createTextNode("Nom des types :");
+    tag.appendChild(text);
+    div.appendChild(tag);
+    hr = document.createElement("hr");
+    div.appendChild(hr);
     //Affiche la correspondance du nom et de l'icone
     for (let i of types.get_types()){
         console.log(i);
