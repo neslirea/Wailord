@@ -19,7 +19,10 @@ choix = function(){
 
     if (Gamerunning)
     {
-				musiqueChoix.play();
+	    if(is_Sound)
+	    {
+		    musiqueChoix.play();
+	    }
         context.clearRect(0, 0, canvas.width, canvas.height); //nettoyage du canvas
 
 		// Affichage des pok�mons
