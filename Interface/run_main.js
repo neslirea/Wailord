@@ -163,8 +163,7 @@ menus = function(){
 				}
             }
 
-            //MEME QUE CAS BLEU
-
+            //TYPES
             context.fillStyle='red';
             context.fillText('Etude des types', (canvas.width)*4/7, (canvas.height)*5/12,(canvas.height)*3/5,(canvas.height)/12);
             if((posSourisX>(canvas.width)*4/7)&(posSourisY>(canvas.height)*9/24)&(posSourisY<(canvas.height)*5/12))
@@ -188,8 +187,7 @@ menus = function(){
 				}
             }
 
-			//MEME QUE CAS BLEU
-
+			//OPTIONS
             context.fillStyle='green';
             context.fillText('Options', (canvas.width)*4/7, (canvas.height)*6/12,(canvas.height)*2/5,(canvas.height)/12);
             if((posSourisX>(canvas.width)*4/7)&(posSourisY>(canvas.height)*11/24)&(posSourisY<(canvas.height)*6/12))
@@ -222,8 +220,7 @@ menus = function(){
             }
 
 
-			// subtilité pour les crédits
-
+			// CREDITS
             context.fillStyle='salmon';
             context.fillText('Crédits', (canvas.width)*4/7,  (canvas.height)*7/12,(canvas.height)*2/5,(canvas.height)/12);
             if((posSourisX>(canvas.width)*4/7)&(posSourisY>(canvas.height)*13/24)&(posSourisY<(canvas.height)*7/12))

@@ -60,20 +60,22 @@ combats = function()
 }
 
 Fin = function(){
-    context.clearRect(0, 0, canvas.width, canvas.height);
-        context.font = "bold 50px courier";
-        context.fillStyle='black';
+    //context.clearRect(0, 0, canvas.width, canvas.height);
+    AfficherCombat();
+        //context.font = "bold 50px courier";
+        //context.fillStyle='black';
         if (current_pkm.pv>0){
             battle.pause();
             victoire.play();
-            console.log("victoire");
-            context.fillText("Vous avez gagné !", 300, 170);
+            AfficherTexte("Vous avez gagné !");
+            //context.fillText("Vous avez gagné !", 300, 170);
         } else {
             battle.pause();
             defaite.play();
-            context.fillText("Vous avez perdu...", 300, 170);
+            AfficherTexte("Vous avez perdu...");
+            //context.fillText("Vous avez perdu...", 300, 170);
         }
-    context.drawImage(skip,canvas.width-50,canvas.height-50,50,50);
+    context.drawImage(skip,canvas.width-150,canvas.height-80,50,50);
 }
 
 Deb_Tour = function(){
@@ -91,7 +93,6 @@ Deb_Tour = function(){
         combat_fin_interval_ID=setInterval(Fin,100);
         //permet de pouvoir cliquer pour passer � l'autre �cran
         choix_pokemons = null;
-	    context.drawImage(skip,canvas.width-50,canvas.height-50,50,50);
         window.onclick = () => {
           defaite.pause();
           victoire.pause();

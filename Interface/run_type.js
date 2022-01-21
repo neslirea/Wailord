@@ -2,8 +2,7 @@
 let Button = document.getElementById("Valider");
 Button.addEventListener("click", TesterType); 
 
-let Button2 = document.getElementById("Fermer");
-Button2.addEventListener("click", Fermer); 
+
 
 
 
@@ -21,6 +20,4 @@ Button2.addEventListener("click", Fermer);
     types.get_types();
 }
 
-function Fermer(){
-    window.close();
-}
+
