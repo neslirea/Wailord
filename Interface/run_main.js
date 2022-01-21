@@ -3,13 +3,12 @@ let canvas;
 let context;
 let backgroundContext;
 //
-let sound_ON;
 
 let Gamerunning = false; //drapeau pour l'écran titre
-
+/*
 let mob = new Image(); //image pikachu de l'écran de transition
 	mob.src = "Sprites_Menus/pika.png";
-
+*/
 
 let titlescreen = new Image(); //image pour l'écran titre
 	titlescreen.src = "Sprites_Menus/affpoke.png"
@@ -69,8 +68,8 @@ let OPTIONS_Interval_ID;
 //le background ici ne nous sert pas pour l'instant, voir il ne nous servira pas donc éléments à retirer éventuellement
 window.onload = function()		// At start
 {
-    if (sound_ON==null){
-        soud_ON = true;
+    if (is_Sound==null){
+        is_Sound = true;
     }
     let backgroundCanvas;
     let monPara = window.document.getElementById("para_1"); //inutile aussi dans un premier temps
@@ -191,7 +190,7 @@ menus = function(){
                 context.fillStyle='green';
 				context.fillText('Options', (canvas.width)*4/7, (canvas.height)*6/12,(canvas.height)*2/5,(canvas.height)/12);
 				window.onclick = () => {
-					if (sound_ON){
+					if (is_Sound){
 						gener.pause();
 						options_sound.play();	
 					}
@@ -220,7 +219,7 @@ menus = function(){
 				//SUR SELECTION DE CREDITS, FIN DE REPETITION DE LA FONCTION MENUS ET DEBUT DE LA FONCTION CREDITS (voir clearInterval et setInterval ci-dessous)
 
 				window.onclick = () => {
-					if (sound_ON){	
+					if (is_Sound){	
 						gener.pause();
 						creditsound.play();
 					}
@@ -244,7 +243,7 @@ menus = function(){
         context.font = "bold 50px courier";
         context.fillText('Click to play', 180, 590);
 		//
-		if(sound_ON){
+		if(is_Sound){
 			gener.play(); //lancement musique gener
 		}
     }

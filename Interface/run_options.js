@@ -1,8 +1,10 @@
 // options affiche un écran fixe qu'on peut quitter en cliquant sur un bouton et où on peut désactiver le son
+let is_Sound = true;
+
 options = function()
 {
 	context.clearRect(0,0,canvas.width, canvas.height);	
-	console.log(sound_ON);
+	console.log(is_Sound);
 	window.onclick=()=>{};
 	let marge = 8;
 	//Dessine l'image de fond
@@ -10,7 +12,7 @@ options = function()
 	context.drawImage(crd,0,0,canvas.width,canvas.height);
 
 	//Affiche l'encadrement sur le paramètre actif
-	if (sound_ON){
+	if (is_Sound){
 		context.fillStyle = "#00FF00";
 		context.fillRect(0.1*canvas.width-2*marge, 0.55*canvas.height-2*marge, 0.35*canvas.width+4*marge,  0.15*canvas.height+4*marge);
 		context.fillStyle = "#6BA163";
@@ -20,7 +22,6 @@ options = function()
 		context.fillRect(0.55*canvas.width-2*marge, 0.55*canvas.height-2*marge, 0.35*canvas.width+4*marge,  0.15*canvas.height+4*marge);
 		context.fillStyle = "#6BA163";
 		context.fillRect(0.55*canvas.width-marge, 0.55*canvas.height-marge, 0.35*canvas.width+2*marge,  0.15*canvas.height+2*marge);
-
 	}
 
 	//Rectangle pour quitter
@@ -41,7 +42,7 @@ options = function()
 			creditsound.pause();
 			creditsound.currentTime=0;
 			gener.currentTime=0;
-			if(sound_ON){
+			if(is_Sound){
 				gener.play();
 			}
 		}
@@ -56,7 +57,7 @@ options = function()
 		context.fillRect(0.1*canvas.width, 0.55*canvas.height, 0.35*canvas.width,  0.15*canvas.height);
 		//si on clique dessus, on active le son
 		window.onclick =() => {
-			soud_ON = true;
+			is_Sound = true;
 			console.log("c");
 			//options();
 		}
@@ -71,19 +72,17 @@ options = function()
 		context.fillRect(0.55*canvas.width, 0.55*canvas.height, 0.35*canvas.width,  0.15*canvas.height);
 		//si on clique dessus, on active le son
 		window.onclick =() => {
-			soud_ON = false;
+			is_Sound = false;
 			//options();
 		}
 	}
 	//Affiche les textes
-
 	context.globalAlpha = 0.8;
 	context.fillStyle = "white";
 
 	context.fillRect(0.55*canvas.width+marge, 0.55*canvas.height+marge, 0.35*canvas.width-marge*2,  0.15*canvas.height-marge*2);
 	context.fillRect(0.1*canvas.width+marge, 0.55*canvas.height+marge, 0.35*canvas.width-marge*2,  0.15*canvas.height-marge*2);
 	context.globalAlpha = 1;
-
 	
     context.font = "bold 30px courier";
     context.fillStyle='black';
