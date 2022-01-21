@@ -1,8 +1,17 @@
-// options affiche un �cran fixe qu'on peut quitter en cliquant sur un bouton et o� on peut d�sactiver le son
+// options affiche un écran fixe qu'on peut quitter en cliquant sur un bouton et où on peut désactiver le son
 let is_Sound = true;
 
 options = function()
 {
+	//par défaut le menu est lancé avec un son (options_sound) donc il faut vérifier si le paramètre de musique est désactivé pour couper la musique
+	if(is_Sound)
+	{
+		options_sound.play();
+	}
+	else
+	{
+		options_sound.pause();
+	}
 	context.clearRect(0,0,canvas.width, canvas.height);	
 	console.log(is_Sound);
 	window.onclick=()=>{};
@@ -11,7 +20,7 @@ options = function()
 	
 	context.drawImage(crd,0,0,canvas.width,canvas.height);
 
-	//Affiche l'encadrement sur le param�tre actif
+	//Affiche l'encadrement sur le paramètre actif
 	if (is_Sound){
 		context.fillStyle = "#00FF00";
 		context.fillRect(0.1*canvas.width-2*marge, 0.55*canvas.height-2*marge, 0.35*canvas.width+4*marge,  0.15*canvas.height+4*marge);
@@ -39,8 +48,8 @@ options = function()
 		window.onclick =() => {
 			clearInterval(OPTIONS_Interval_ID);
 			MENU_Interval_ID=setInterval(menus,40);
-			creditsound.pause();
-			creditsound.currentTime=0;
+			options_sound.pause();
+			options_sound.currentTime=0;
 			gener.currentTime=0;
 			if(is_Sound){
 				gener.play();
