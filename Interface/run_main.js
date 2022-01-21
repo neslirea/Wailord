@@ -3,6 +3,7 @@ let canvas;
 let context;
 let backgroundContext;
 //
+let sound_ON;
 
 let Gamerunning = false; //drapeau pour l'écran titre
 
@@ -23,16 +24,16 @@ let chef = new Image(); //image pour le menu
 let posSourisX = 0;
 let posSourisY = 0;
 //
-//fond musical menus et crédits
+//fond musical menus crédits, option
 let gener = new Audio('Musiques/MainTheme.mp3');
 gener.loop=true;
 gener.volume=0.5;
 let creditsound = new Audio('Musiques/PokemonLeagueTheme.mp3');
 creditsound.loop=true;
 creditsound.volume=0.5;
-let options = new Audio('Musiques/Options.mp3');
-options.loop=true;
-options.volume=0.5;
+let options_sound = new Audio('Musiques/Options.mp3');
+options_sound.loop=true;
+options_sound.volume=0.5;
 
 // CREDITS
 let crd = new Image();
@@ -59,16 +60,20 @@ let stephane = new Image();
 
 //
 //variables pour contenir les id des setInterval pour pouvoir les clear et donc arrêter les répétitions
-let MENU_Interval_ID
-let Credits_Interval_ID
+let MENU_Interval_ID;
+let CREDITS_Interval_ID;
+let OPTIONS_Interval_ID;
 //
 
 
 //le background ici ne nous sert pas pour l'instant, voir il ne nous servira pas donc éléments à retirer éventuellement
 window.onload = function()		// At start
 {
-let backgroundCanvas;
-let monPara = window.document.getElementById("para_1"); //inutile aussi dans un premier temps
+    if (sound_ON==null){
+        soud_ON = true;
+    }
+    let backgroundCanvas;
+    let monPara = window.document.getElementById("para_1"); //inutile aussi dans un premier temps
 
     //init background for collision test
     backgroundCanvas = document.createElement( "canvas" );
@@ -88,7 +93,7 @@ let monPara = window.document.getElementById("para_1"); //inutile aussi dans un 
     // Init context to draw the game
     context = canvas.getContext("2d");
 
-    MENU_Interval_ID=setInterval(menus,10); //répétitions toutes les 10ms de la fonction menus
+    MENU_Interval_ID=setInterval(menus,40); //répétitions toutes les 10ms de la fonction menus
 
 
 }
@@ -102,10 +107,7 @@ function mouse_position(event) //permet de relever la position de la souris via 
 
 let transit = true //drapeau transition
 
-//drapeaux pour la gestion de l'audio dans les menus
-let prtaudio = 10;
-let casep;
-//
+
 
 menus = function(){
     window.onclick = () => Gamerunning = true
@@ -116,9 +118,9 @@ menus = function(){
         if(transit){
 			//affichage du fond titlescreen avec les pika en transition
 			context.drawImage(titlescreen,0,0,canvas.width,canvas.height);
-            context.drawImage(mob,0,0, (canvas.width)/10, (canvas.height)/8);
-            context.drawImage(mob,(canvas.width)*9/10,(canvas.height)*7/8, (canvas.width)/10, (canvas.height)/8);
-            setTimeout(()=> transit=false, 2000) //timer de transition de 2000ms, échu alors fin de transition
+            //context.drawImage(mob,canvas.width/2-(mob.width*canvas.height/2/mob.height)/2,canvas.height-canvas.height/2, mob.width*canvas.height/2/mob.height, (canvas.height)/2);
+            //context.drawImage(mob,(canvas.width)*9/10,(canvas.height)*7/8, (canvas.width)/10, (canvas.height)/8);
+            setTimeout(()=> transit=false, 1000) //timer de transition de 2000ms, échu alors fin de transition
         }
         else{
 			//affichage de texte et de ses paramètres
@@ -146,19 +148,13 @@ menus = function(){
 
                 context.fillStyle='blue';
 				context.fillText('Campagne', (canvas.width)*4/7, (canvas.height)*4/12,(canvas.height)*2/5,(canvas.height)/12);
-				if (prtaudio!=0) //si la souris arrive sur la zone depuis une autre zone alors...
-				{
-					prtaudio = 0;
-					let audio = new Audio('selection.mp3')
-					audio.play()
-				}
 
-				//SUR CLICK, TRANSITION VERS UN ECRAN FIXE, SUITE A DETERMINER
+				//SUR CLICK, TRANSITION 
 				window.onclick = () => {
 					gener.pause();
 					context.clearRect(0, 0, canvas.width, canvas.height);
 					clearInterval(MENU_Interval_ID)
-					CHOIX_Interval_ID=setInterval(choix,10);
+					CHOIX_Interval_ID=setInterval(choix,40);
 					choix();
 				}
             }
@@ -176,12 +172,6 @@ menus = function(){
                 context.fillRect((canvas.width)*11/21, (canvas.height)*9/24, (canvas.width)*13/21, (canvas.height)/24);
                 context.fillStyle='red';
 				context.fillText('Etude des types', (canvas.width)*4/7, (canvas.height)*5/12,(canvas.height)*3/5,(canvas.height)/12);
-				if (prtaudio!=1)
-				{
-					prtaudio = 1;
-					let audio = new Audio('selection.mp3')
-					audio.play()
-				}
 				window.onclick = () => {
 					window.open('https://neslirea.github.io/Wailord/types.html', '_blank');
 				}
@@ -200,22 +190,14 @@ menus = function(){
                 context.fillRect((canvas.width)*11/21, (canvas.height)*11/24, (canvas.width)*13/21, (canvas.height)/24);
                 context.fillStyle='green';
 				context.fillText('Options', (canvas.width)*4/7, (canvas.height)*6/12,(canvas.height)*2/5,(canvas.height)/12);
-				if (prtaudio!=2)
-				{
-					prtaudio = 2;
-					let audio = new Audio('selection.mp3')
-					audio.play()
-				}
 				window.onclick = () => {
-					gener.pause();
-					options.play();
-					context.clearRect(0, 0, canvas.width, canvas.height);
-					clearInterval(MENU_Interval_ID)
-					console.log(MENU_Interval_ID)
-					context.drawImage(titlescreen,0,0,canvas.width,canvas.height);
-					context.drawImage(mob,0,0, 100, 100);
-					context.drawImage(mob,700,500, 100, 100);
-
+					if (sound_ON){
+						gener.pause();
+						options_sound.play();	
+					}
+					clearInterval(MENU_Interval_ID);
+					OPTIONS_Interval_ID=setInterval(options,100);
+					//options();
 				}
             }
 
@@ -233,30 +215,23 @@ menus = function(){
                 context.fillRect((canvas.width)*11/21, (canvas.height)*13/24, (canvas.width)*13/21, (canvas.height)/24);
                 context.fillStyle='salmon';
 				context.fillText('Crédits', (canvas.width)*4/7,  (canvas.height)*7/12,(canvas.height)*2/5,(canvas.height)/12);
-				if (prtaudio!=3)
-				{
-					prtaudio = 3;
-					let audio = new Audio('selection.mp3');
-					audio.play();
-				}
+
 
 				//SUR SELECTION DE CREDITS, FIN DE REPETITION DE LA FONCTION MENUS ET DEBUT DE LA FONCTION CREDITS (voir clearInterval et setInterval ci-dessous)
 
 				window.onclick = () => {
-					gener.pause();
-					creditsound.play()
+					if (sound_ON){	
+						gener.pause();
+						creditsound.play();
+					}
 					context.clearRect(0, 0, canvas.width, canvas.height);
 					console.log(MENU_Interval_ID)
 					clearInterval(MENU_Interval_ID)
-					Credits_Interval_ID=setInterval(credits,10);
+					CREDITS_Interval_ID=setInterval(credits,40);
 					credits();
 				}
             }
-			if((casep!="blue")&(casep!="red")&(casep!="green")&(casep!="salmon")) //si souris en dehors des zones de textes de couleur...
-			{
-				prtaudio=10;
-			}
-			casep="vide";
+
 
         }
 
@@ -269,32 +244,10 @@ menus = function(){
         context.font = "bold 50px courier";
         context.fillText('Click to play', 180, 590);
 		//
-
-		gener.play(); //lancement musique gener
-
+		if(sound_ON){
+			gener.play(); //lancement musique gener
+		}
     }
-
 }
 
-//crédits affiche un écran fixe (à agrémenter par la suite) qu'on peut quitter en cliquant
 
-credits = function()
-{
-	creditsound.play();
-	context.drawImage(crd,0,0,canvas.width,canvas.height);
-
-	 context.drawImage(programmers,490,340,170,25);
-	 context.drawImage(clea,493,385,160,25);
-	 context.drawImage(mattew,493,420,160,25);
-	 context.drawImage(yann,493,455,160,25);
-	 context.drawImage(stephane,480,490,185,28);
-	 context.drawImage(skip,canvas.width-50,canvas.height-50,50,50);
-	window.onclick =() => {
-		clearInterval(Credits_Interval_ID)
-		MENU_Interval_ID=setInterval(menus,10);
-		creditsound.pause();
-		creditsound.currentTime=0;
-		gener.currentTime=0;
-		gener.play();
-	}
-}

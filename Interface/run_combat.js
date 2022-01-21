@@ -66,12 +66,12 @@ Fin = function(){
         //context.fillStyle='black';
         if (current_pkm.pv>0){
             battle.pause();
-            victoire.play();
+            if(sound_ON){victoire.play();}
             AfficherTexte("Vous avez gagné !");
             //context.fillText("Vous avez gagné !", 300, 170);
         } else {
             battle.pause();
-            defaite.play();
+            if(sound_ON){defaite.play();}
             AfficherTexte("Vous avez perdu...");
             //context.fillText("Vous avez perdu...", 300, 170);
         }
@@ -101,6 +101,9 @@ Deb_Tour = function(){
 
             clearInterval(combat_fin_interval_ID);
 		    Credits_Interval_ID=setInterval(credits,100);
+            if(sound_ON){
+			    creditsound.play();
+		    }
 		    credits();
         }
     } else {    //si non, on lance un tour
