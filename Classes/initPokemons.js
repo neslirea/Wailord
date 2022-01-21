@@ -48,7 +48,7 @@ Pokemons = function(){
     let atk3ten = new Capacite("Tranche-Nuit", "Tenebres", 90, 95);
  
     let atk1dra = new Capacite("Draco-Souffle", "Dragon", 60, 100);
-    let atk2dra = new Capacite("Colère", "Dragon", 110, 90);
+    let atk2dra = new Capacite("Colere", "Dragon", 110, 90);
     let atk3dra = new Capacite("Draco-Griffe", "Dragon", 90, 95);
  
     let atk1ele = new Capacite("Etincelle", "Electrik", 60, 100);
@@ -61,7 +61,7 @@ Pokemons = function(){
  
     let atk1com = new Capacite("Balayette", "Combat", 60, 100);
     let atk2com = new Capacite("Close-Combat", "Combat", 110, 90);
-    let atk3com = new Capacite("Aurasphère", "Combat", 90, 95);
+    let atk3com = new Capacite("Aurasphere", "Combat", 90, 95);
  
     let atk1vol = new Capacite("Tranch-Air", "Vol", 60, 100);
     let atk2vol = new Capacite("Rapace", "Vol", 110, 90);
@@ -83,8 +83,8 @@ Pokemons = function(){
     let atk2nor = new Capacite("Ultralaser", "Normal", 110, 90);
     let atk3nor = new Capacite("Plaquage", "Normal", 90, 95);
  
-    let atk1poi = new Capacite("Détritus", "Poison", 60, 100);
-    let atk2poi = new Capacite("Détricanon", "Poison", 110, 90);
+    let atk1poi = new Capacite("Detritus", "Poison", 60, 100);
+    let atk2poi = new Capacite("Detricanon", "Poison", 110, 90);
     let atk3poi = new Capacite("Direct Toxic", "Poison", 90, 95);
  
     let atk1psy = new Capacite("Choc Mental", "Psy", 60, 100);

@@ -11,7 +11,7 @@ credits = function()
 	 context.drawImage(skip,canvas.width-50,canvas.height-50,50,50);
 	window.onclick =() => {
 		clearInterval(CREDITS_Interval_ID);
-		MENU_Interval_ID=setInterval(menus,10);
+		MENU_Interval_ID=setInterval(menus,40);
 		creditsound.pause();
 		creditsound.currentTime=0;
 		gener.currentTime=0;

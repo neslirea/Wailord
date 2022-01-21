@@ -45,9 +45,7 @@ function AfficherDegats(isUser, PV_Init, PVperdus){
 }
 
 function AfficherManque(){                                 
-	context.font = "bold 40px courier";
-	context.fillStyle='black';
-	context.fillText("Mais cela échoue !", 300, 270);
+	AfficherTexte("Mais cela echoue !");
 }
 
 function AffichageChoixAttaque(pokemon){
