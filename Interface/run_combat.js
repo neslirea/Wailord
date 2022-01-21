@@ -100,7 +100,7 @@ Deb_Tour = function(){
 
 
             clearInterval(combat_fin_interval_ID);
-		    Credits_Interval_ID=setInterval(credits,40);
+		    CREDITS_Interval_ID=setInterval(credits,40);
             if(is_Sound){
 			    creditsound.play();
 		    }
