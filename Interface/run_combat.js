@@ -39,9 +39,12 @@ defaite.volume=0.5;
 combats = function()
 {
     //window.onclick = () => Gamerunning = true
-  battle.play();
+  if(is_Sound)
+  {
+	battle.play();
+  }
   context.fillStyle = "grey";
-	context.fillRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
+  context.fillRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
 
     if (!combat_init){
         let possibilites = Pokemons();
