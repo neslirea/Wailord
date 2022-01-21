@@ -7,7 +7,7 @@ let jaugeE = new Image();
 var terrain = new Image();
 	terrain.src = "Sprites_Menus/battleground.jpg";
 
-let cadre = new Image(); //image pikachu de l'écran de transition
+let cadre = new Image(); //image pikachu de l'Ã©cran de transition
 	cadre.src = "Sprites_Menus/cadre.png";
 
 function AfficherAttaque(Attaquant, Attaque){
@@ -16,16 +16,16 @@ function AfficherAttaque(Attaquant, Attaque){
 
 function AfficherEfficacite(Efficacite){
 	if (Efficacite==0){
-		AfficherTexte("La cible n'est pas affectée...'");
+		AfficherTexte("La cible n'est pas affectee...'");
 	} else if (Efficacite<1){
-		AfficherTexte("Ce n'est pas très efficace...");
+		AfficherTexte("Ce n'est pas tres efficace...");
     } else if (Efficacite>1){
 		AfficherTexte("C'est super efficace !");
     }
 }
 
 function AfficherDegats(isUser, PV_Init, PVperdus){
-	//isUser à 1 s'il s'agit du pok de l'utilisateur, 0 si c'est l'IA
+	//isUser Ã  1 s'il s'agit du pok de l'utilisateur, 0 si c'est l'IA
 	const fps_voulus = 60;
 	AfficherStatut(current_pkm.pv, adversaire.pv);
 	if(isUser){
@@ -54,7 +54,7 @@ function AffichageChoixAttaque(pokemon){
 	
 	//affichage d'un rectangle avec transparence 
 	context.globalAlpha = 0.2;
-	//définit la zone de choix des attaques
+	//dÃ©finit la zone de choix des attaques
 	let y0 = canvas.height-combat_hauteur_menu+marge
 	let y1 = canvas.height-marge
 	let x0 = canvas.width*(1-ratio_menu)+marge
@@ -192,11 +192,11 @@ function AfficherStatut(PV1, PV2){
     context.fillText(current_pkm.nom, 500+54, 320+48);
 }
 
-//permet d'afficher l'interface du haut de l'écran : fond, pokemons, status
+//permet d'afficher l'interface du haut de l'Ã©cran : fond, pokemons, status
 function AfficherCombat(){
 	context.drawImage(terrain,0,0, canvas.width, canvas.height-combat_hauteur_menu);    
 	AfficherStatut(current_pkm.pv, adversaire.pv);		
-    //redessine le pok toutes les secondes (cas où l'image est mal chargée)
+    //redessine le pok toutes les secondes (cas oÃ¹ l'image est mal chargÃ©e)
     let image1 = new Image();
 	image1.src = "Sprites_Pokemon/"+current_pkm.sprite_dos;
 	let image2 = new Image();
