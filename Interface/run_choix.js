@@ -46,8 +46,6 @@ choix = function(){
 
 		// Dessine un rectangle pour former le bouton s�lection
 		lineaire = context.createLinearGradient(160, 500, 485, 60);
-		//lineaire.addColorStop(0,'#0062cc');
-        //lineaire.addColorStop(1, '#0022bb');
 		lineaire.addColorStop(0, '#0062cc');
 		lineaire.addColorStop(1, '#0022bb');
         context.fillStyle = lineaire;
@@ -108,8 +106,6 @@ choix = function(){
 			//affichage d'un rectangle avec transparence
 			context.globalAlpha = 0.4;
 			let lineaire = context.createLinearGradient(175, 130, 450, 350);
-			//lineaire.addColorStop(0,'#850606');
-			//lineaire.addColorStop(1, '#f0f0f0');
 			lineaire.addColorStop(0,'#ffffff');
 			lineaire.addColorStop(1, '#dddddd');
 			context.fillStyle = lineaire;
@@ -179,14 +175,6 @@ choix = function(){
 		//gestion du d�placement � la souris sur le bouton SELECT (160, 500, 485, 60)
         if((posSourisX>(width/2-485/2))&(posSourisX<(width/2+485/2))&(posSourisY>(0.85*height))&(posSourisY<(0.85*height+60))) //si la souris se trouve dans cette zone...
 		{
-			//affichage d'un rectangle avec transparence
-			// Dessine un rectangle pour former le bouton s�lection
-			/*
-			lineaire = context.createLinearGradient(160, 500, 485, 60);
-			lineaire.addColorStop(0,'#0062cc');
-			lineaire.addColorStop(1, '#0022bb');
-			context.fillStyle = lineaire;
-			context.fillRect(160, 500, 485, 60);*/
 			context.font = "bold 30px courier";
 
 			context.fillStyle = "black";
@@ -203,10 +191,6 @@ choix = function(){
 					combats();
 			}
 		}
-
-			/* AFFICHAGE DE LA POS SOURIS (debug)
-			console.log(posSourisX)
-		console.log(posSourisY)*/
 
     }
 	//inutile : affiche un �cran d'acceuil s il s'agit du premier �cran
