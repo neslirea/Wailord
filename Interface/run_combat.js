@@ -38,7 +38,6 @@ defaite.volume=0.5;
 */
 combats = function()
 {
-    //window.onclick = () => Gamerunning = true
   if(is_Sound)
   {
 	battle.play();
@@ -63,22 +62,17 @@ combats = function()
 }
 
 Fin = function(){
-    //context.clearRect(0, 0, canvas.width, canvas.height);
     AfficherCombat();
-        //context.font = "bold 50px courier";
-        //context.fillStyle='black';
         if (current_pkm.pv>0){
             battle.pause();
             battle.currentTime=0;
             if(is_Sound){victoire.play();}
             AfficherTexte("Vous avez gagne !");
-            //context.fillText("Vous avez gagné !", 300, 170);
         } else {
             battle.pause();
             battle.currentTime=0;
             if(is_Sound){defaite.play();}
             AfficherTexte("Vous avez perdu...");
-            //context.fillText("Vous avez perdu...", 300, 170);
         }
     context.drawImage(skip,canvas.width-150,canvas.height-80,50,50);
 }
@@ -89,8 +83,7 @@ Deb_Tour = function(){
     AfficherStatut(current_pkm.pv, adversaire.pv);
     context.fillStyle = "grey";
 	context.fillRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
-    //11111
-    console.log("Deb_Tour");
+
     //On regarde si le combat est fini
     if(current_pkm.pv==0||adversaire.pv==0){
         //si oui, on affiche le r�sultat puis on passe � l'�cran des cr�dits
@@ -120,8 +113,6 @@ Deb_Tour = function(){
 }
 
 Combat_Choix = function(){
-    //11111
-    console.log("Choix");
     AfficherCombat();
 	context.clearRect(0, canvas.height-combat_hauteur_menu, canvas.width, combat_hauteur_menu);
     context.fillStyle = "grey";
@@ -147,12 +138,6 @@ Combat_Choix = function(){
 	let width =  (x1-x0-3*combat_marge)/2
 	let height = (y1-y0-3*combat_marge)/2
 
-    /*coordinates
-    context.fillRect(x0+marge, y0+marge, width, height);
-	context.fillRect(x0+width+2*marge, y0+marge, width, height);
-	context.fillRect(x0+marge, y0+height+2*marge, width, height);
-	context.fillRect(x0+width+2*marge, y0+height+2*marge, width, height);*/
-    // variable pour savoir si on est pass� sur un des rectangles d'attaques et si oui lequel
     let selected=-1;
     if((posSourisX>x0+combat_marge)&(posSourisX<x0+combat_marge+width)&(posSourisY>y0+combat_marge)&(posSourisY<y0+combat_marge+height)){
         window.onclick = () => {};
@@ -190,8 +175,6 @@ Combat_Choix = function(){
 
 Tour = function(att1, att2)
 {
-    //11111
-    console.log("Tour");
     let pokemon1 = current_pkm;
         let pokemon2 = adversaire;
         let isUserFirst = 1;
