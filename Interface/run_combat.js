@@ -69,11 +69,13 @@ Fin = function(){
         //context.fillStyle='black';
         if (current_pkm.pv>0){
             battle.pause();
+            battle.currentTime=0;
             if(is_Sound){victoire.play();}
             AfficherTexte("Vous avez gagne !");
             //context.fillText("Vous avez gagné !", 300, 170);
         } else {
             battle.pause();
+            battle.currentTime=0;
             if(is_Sound){defaite.play();}
             AfficherTexte("Vous avez perdu...");
             //context.fillText("Vous avez perdu...", 300, 170);
@@ -98,7 +100,9 @@ Deb_Tour = function(){
         choix_pokemons = null;
         window.onclick = () => {
           defaite.pause();
+          defaite.currentTime = 0;
           victoire.pause();
+          victoire.currentTime = 0;
 
 
 

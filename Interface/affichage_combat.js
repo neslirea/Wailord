@@ -1,6 +1,6 @@
 let jaugeJ = new Image();
 	jaugeJ.src = "Sprites_Menus/jaugej.png"
-	
+
 let jaugeE = new Image();
 	jaugeE.src = "Sprites_Menus/jaugee.png"
 // fond
@@ -10,6 +10,13 @@ var terrain = new Image();
 let cadre = new Image(); //image pikachu de l'écran de transition
 	cadre.src = "Sprites_Menus/cadre.png";
 
+let efficace = new Audio('Musiques/Effective.mp3');
+		efficace.volume=0.5;
+let pasEfficace = new Audio('Musiques/notVeryEffective.mp3');
+		pasEfficace.volume=0.5;
+let superEfficace = new Audio('Musiques/superEffective.mp3');
+		superEfficace.volume=0.5;
+
 function AfficherAttaque(Attaquant, Attaque){
     AfficherTexte(Attaquant.nom + " utilise " + Attaque.nom +" !");
 }
@@ -18,10 +25,14 @@ function AfficherEfficacite(Efficacite){
 	if (Efficacite==0){
 		AfficherTexte("La cible n'est pas affectee...'");
 	} else if (Efficacite<1){
-		AfficherTexte("Ce n'est pas tres efficace...");
+			pasEfficace.play();
+			AfficherTexte("Ce n'est pas tres efficace...");
     } else if (Efficacite>1){
-		AfficherTexte("C'est super efficace !");
-    }
+			superEfficace.play();
+			AfficherTexte("C'est super efficace !");
+	} else {
+			efficace.play();
+	}
 }
 
 function AfficherDegats(isUser, PV_Init, PVperdus){
@@ -44,15 +55,15 @@ function AfficherDegats(isUser, PV_Init, PVperdus){
 	}
 }
 
-function AfficherManque(){                                 
+function AfficherManque(){
 	AfficherTexte("Mais cela echoue !");
 }
 
 function AffichageChoixAttaque(pokemon){
 	const marge = combat_marge;
 	const ratio_menu = combat_ratio_menu;
-	
-	//affichage d'un rectangle avec transparence 
+
+	//affichage d'un rectangle avec transparence
 	context.globalAlpha = 0.2;
 	//définit la zone de choix des attaques
 	let y0 = canvas.height-combat_hauteur_menu+marge
@@ -67,7 +78,7 @@ function AffichageChoixAttaque(pokemon){
 	context.fillStyle = lineaire;
 	context.fillRect( x0, y0, x1-x0, y1-y0);
 	context.globalAlpha = 1;
-			
+
 	lineaire = context.createLinearGradient(175, 130, 450, 350);
 	lineaire.addColorStop(0,'#dfdfdf');
 	lineaire.addColorStop(1, '#b0b0b0');
@@ -81,12 +92,12 @@ function AffichageChoixAttaque(pokemon){
 	context.fillRect(x0+marge, y0+height+2*marge, width, height);
 	context.fillRect(x0+width+2*marge, y0+height+2*marge, width, height);
 	//affichage de l'attaque 1
-	if (attaques.length>=1){			
-				context.fillStyle = "white";				
-				context.fillRect(x0+marge, y0+marge, width, height);				
+	if (attaques.length>=1){
+				context.fillStyle = "white";
+				context.fillRect(x0+marge, y0+marge, width, height);
 				context.globalAlpha = 0.4;
 				let type1 = new Image();
-				type1.src = "Sprites_Menus/"+attaques[0].type+".png";	
+				type1.src = "Sprites_Menus/"+attaques[0].type+".png";
 				context.drawImage(type1,x0+marge+width-height, y0+marge, height, height); //affichage du type du pokemon
 				context.globalAlpha = 1;
 				context.font = "bold 18px courier";
@@ -94,25 +105,25 @@ function AffichageChoixAttaque(pokemon){
 				context.fillText((attaques[0].nom), x0+2*marge, y0+1.5*marge+height/2);
 
 	}
-	if (attaques.length>=2){				
-				context.fillStyle = "white";				
+	if (attaques.length>=2){
+				context.fillStyle = "white";
 				context.fillRect(x0+width+2*marge, y0+marge, width, height);
 				context.globalAlpha = 0.4;
 				let type2 = new Image();
-				type2.src = "Sprites_Menus/"+attaques[1].type+".png";	
+				type2.src = "Sprites_Menus/"+attaques[1].type+".png";
 				context.drawImage(type2,x0+width+2*marge+width-height, y0+marge, height, height); //affichage du type du pokemon
 				context.globalAlpha = 1;
 				context.font = "bold 18px courier";
 				context.fillStyle='black';
 				context.fillText((attaques[1].nom), x0+width+3*marge, y0+1.5*marge+height/2);
 	}
-	if (attaques.length>=3){				
-				context.fillStyle = "white";				
+	if (attaques.length>=3){
+				context.fillStyle = "white";
 				context.fillRect(x0+marge, y0+height+2*marge, width, height);
 
 				context.globalAlpha = 0.4;
 				let type3 = new Image();
-				type3.src = "Sprites_Menus/"+attaques[2].type+".png";	
+				type3.src = "Sprites_Menus/"+attaques[2].type+".png";
 				context.drawImage(type3,x0+marge+width-height, y0+height+2*marge, height, height); //affichage du type du pokemon
 				context.globalAlpha = 1;
 
@@ -120,13 +131,13 @@ function AffichageChoixAttaque(pokemon){
 				context.fillStyle='black';
 				context.fillText((attaques[2].nom), x0+2*marge, y0+height+2*marge+height/2);
 	}
-	if (attaques.length>=4){				
-				context.fillStyle = "white";				
+	if (attaques.length>=4){
+				context.fillStyle = "white";
 				context.fillRect(x0+width+2*marge, y0+height+2*marge, width, height);
 
 				context.globalAlpha = 0.4;
 				let type4 = new Image();
-				type4.src = "Sprites_Menus/"+attaques[3].type+".png";	
+				type4.src = "Sprites_Menus/"+attaques[3].type+".png";
 				context.drawImage(type4,x0+width+2*marge+width-height, y0+height+2*marge, height, height); //affichage du type du pokemon
 				context.globalAlpha = 1;
 
@@ -134,7 +145,7 @@ function AffichageChoixAttaque(pokemon){
 				context.fillStyle='black';
 				context.fillText((attaques[3].nom), x0+width+3*marge, y0+height+2*marge+height/2);
 	}
-}		
+}
 
 function AfficherTexte(txt){
 	context.drawImage(cadre,combat_marge,canvas.height-combat_hauteur_menu+combat_marge, canvas.width-combat_marge*2, combat_hauteur_menu-2*combat_marge);
@@ -148,8 +159,8 @@ function AfficherTexte(txt){
 function AfficherStatut(PV1, PV2){
 	let PV1_MAX=current_pkm.maxpv;
 	let PV2_MAX=adversaire.maxpv;
-	
-		
+
+
 	context.fillStyle='white';
 	context.fillRect(635, 350, 140, 70)
 	context.fillRect(360, 100, 150, 40)
@@ -163,12 +174,12 @@ function AfficherStatut(PV1, PV2){
 		context.fillStyle='yellow';
 		context.fillRect(635, 350, 140*PV1/PV1_MAX, 70)
 	}
-	else 
+	else
 	{
 		context.fillStyle='red';
 		context.fillRect(635, 350, 140*PV1/PV1_MAX, 70)
 	}
-	
+
 	if((PV2/PV2_MAX)*100>40)
 	{
 		context.fillStyle='green';
@@ -179,7 +190,7 @@ function AfficherStatut(PV1, PV2){
 		context.fillStyle='yellow';
 		context.fillRect(360, 100, 150*PV2/PV2_MAX, 40)
 	}
-	else 
+	else
 	{
 		context.fillStyle='red';
 		context.fillRect(360, 100, 150*PV2/PV2_MAX, 40)
@@ -194,8 +205,8 @@ function AfficherStatut(PV1, PV2){
 
 //permet d'afficher l'interface du haut de l'écran : fond, pokemons, status
 function AfficherCombat(){
-	context.drawImage(terrain,0,0, canvas.width, canvas.height-combat_hauteur_menu);    
-	AfficherStatut(current_pkm.pv, adversaire.pv);		
+	context.drawImage(terrain,0,0, canvas.width, canvas.height-combat_hauteur_menu);
+	AfficherStatut(current_pkm.pv, adversaire.pv);
     //redessine le pok toutes les secondes (cas où l'image est mal chargée)
     let image1 = new Image();
 	image1.src = "Sprites_Pokemon/"+current_pkm.sprite_dos;
@@ -205,5 +216,3 @@ function AfficherCombat(){
 		context.drawImage(image2,680,140, 200, 200);
 
 }
-
-

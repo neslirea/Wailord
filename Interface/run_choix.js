@@ -195,6 +195,7 @@ choix = function(){
 			//SUR CLICK, TRANSITION VERS UN AUTRE ECRAN (COMBAT)
 			window.onclick = () => {
 					musiqueChoix.pause();
+					musiqueChoix.currentTime=0;
 					context.clearRect(0, 0, canvas.width, canvas.height);
 					//console.log(MENU_Interval_ID)
 					clearInterval(CHOIX_Interval_ID)
