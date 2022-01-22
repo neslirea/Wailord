@@ -71,8 +71,6 @@ function AffichageChoixAttaque(pokemon){
 	let x0 = canvas.width*(1-ratio_menu)+marge
 	let x1 = canvas.width-marge
 	let lineaire = context.createLinearGradient(x0, y0, x1, y1);
-	//lineaire.addColorStop(0,'#850606');
-	//lineaire.addColorStop(1, '#f0f0f0');
 	lineaire.addColorStop(0,'#ffffff');
 	lineaire.addColorStop(1, '#dddddd');
 	context.fillStyle = lineaire;

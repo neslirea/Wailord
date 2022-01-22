@@ -1,6 +1,5 @@
 
 let CHOIX_Interval_ID;
-//
 let choix_flag = false;
 
 let choix_pokemons = null;
@@ -8,10 +7,8 @@ let choix_current = 0;
 let musiqueChoix = new Audio('Musiques/SelectionPokemon.mp3');
 musiqueChoix.loop=true;
 musiqueChoix.volume=0.5;
-//
 
 choix = function(){
-    //console.log(MENU_Interval_ID)
 	let width = canvas.width;
 	let height = canvas.height;
 
