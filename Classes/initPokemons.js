@@ -167,7 +167,7 @@ Pokemons = function(){
     poke14.ajouterAttaque(atk3nor);
     poke14.ajouterAttaque(atk2nor);
     poke14.ajouterAttaque(atk1spe);
-    poke14.ajouterAttaque(atk3com);
+    poke14.ajouterAttaque(atk2com);
 
     poke15.ajouterAttaque(atk2poi);
     poke15.ajouterAttaque(atk3poi);
