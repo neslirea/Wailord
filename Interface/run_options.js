@@ -20,6 +20,12 @@ options = function()
 	
 	context.drawImage(crd,0,0,canvas.width,canvas.height);
 
+	//Affiche le texte
+	
+	context.font = "bold 50px courier";
+    	context.fillStyle='white';
+	context.fillText('Musique',(canvas.width)*2/5,(canvas.height)/2,(canvas.width)/3);
+	
 	//Affiche l'encadrement sur le paramètre actif
 	if (is_Sound){
 		context.fillStyle = "#00FF00";
