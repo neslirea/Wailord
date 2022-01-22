@@ -16,12 +16,10 @@ options = function()
 	console.log(is_Sound);
 	window.onclick=()=>{};
 	let marge = 8;
-	//Dessine l'image de fond
-	
+	//Dessine l'image de fond	
 	context.drawImage(crd,0,0,canvas.width,canvas.height);
 
-	//Affiche le texte
-	
+	//Affiche le texte	
 	context.font = "bold 50px courier";
     	context.fillStyle='white';
 	context.fillText('Musique',(canvas.width)*2/5,(canvas.height)/2+15,(canvas.width)/3);
@@ -102,7 +100,4 @@ options = function()
     context.fillText(('ON'), 0.1*canvas.width+50, 0.55*canvas.height+75);
     context.font = "bold 40px courier";
     context.fillText(('VALIDER'), 0.40*canvas.width+marge+10, 0.80*canvas.height+marge+55);
-
-
-
 }
